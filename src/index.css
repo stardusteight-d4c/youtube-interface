@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-roboto antialiased scroll-smooth;
+  }
+
+  ::-webkit-scrollbar {
+    @apply bg-transparent w-2;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#c7c7c7] rounded-full;
+  }
+}
