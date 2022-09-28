@@ -8,15 +8,15 @@ type Props = {
 
 const Card = ({ data }: Props) => {
   return (
-    <div className="w-64 h-60 flex gap-3 flex-col">
+    <div className="flex gap-3 2xl:w-80 flex-col transform hover:scale-105 duration-500 transition-all">
       <div className="relative">
-        <span className="absolute bottom-3 right-3 text-sm bg-gray-900 px-2 py-0.5 z-10">
+        <span className="absolute bottom-1 right-1 text-sm bg-black/80 rounded-sm px-1 py-0.5 z-10">
           {data.videoDuration}
         </span>
         <Link to={`/watch/${data.videoId}`}>
           <img
             src={data.videoThumbnail}
-            className="w-72 h-44"
+            className="min-w-64 min-h-36 2xl:w-80 2xl:h-40"
             alt="thumbnail/img"
           />
         </Link>

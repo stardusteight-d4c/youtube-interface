@@ -7,48 +7,65 @@ import {
 } from './fragments/sidebar'
 import { textLinks } from './fragments/sidebar'
 import MenuIconSidebar from './fragments/MenuIconSidebar'
+import { motion, AnimatePresence } from 'framer-motion'
 
-type Props = {}
+type Props = {
+  openMenu: boolean
+}
 
-const Sidebar = (props: Props) => {
+const Sidebar = ({ openMenu }: Props) => {
   return (
-    <aside className="w-2/12 pt-4 bg-[#212121] pr-5 overflow-auto pb-8 sidebar">
-      <ul className="flex flex-col border-b-2 my-2 border-gray-700">
-        {mainLinks.map(({ icon, name }, index) => (
-          <MenuIconSidebar Icon={icon} name={name} key={index} />
-        ))}
-      </ul>
-      <ul className="flex flex-col border-b-2 my-2 border-gray-700">
-        {secondaryLinks.map(({ icon, name }, index) => (
-          <MenuIconSidebar Icon={icon} name={name} key={index} />
-        ))}
-      </ul>
-      <ul className="flex flex-col border-b-2 my-2 border-gray-700">
-        {subscriptionLinks.map(({ icon, name }, index) => (
-          <MenuIconSidebar Icon={icon} name={name} key={index} />
-        ))}
-      </ul>
-      <ul className="flex flex-col border-b-2 my-2 border-gray-700">
-        {helpLinks.map(({ icon, name }, index) => (
-          <MenuIconSidebar Icon={icon} name={name} key={index} />
-        ))}
-      </ul>
-      <ul className="flex gap-2 flex-wrap text-sm p-4 text-zinc-400">
-        {textLinks[0].map((name) => {
-          return <li key={name}>{name}</li>
-        })}
-      </ul>
-      <ul className="flex gap-2 flex-wrap text-sm p-4 text-zinc-400">
-        {textLinks[1].map((name) => {
-          return <li key={name}>{name}</li>
-        })}
-      </ul>
-      <span className="px-4 text-sm text-zinc-400">&copy; 2022 Google</span>
-      <br />
-      <p className="px-4 pt-3 text-sm text-zinc-400">
-        This clone is for educational purpose only.
-      </p>
-    </aside>
+    <>
+      <AnimatePresence>
+        {openMenu && (
+          <motion.aside
+            initial={{ x: -1000, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            exit={{ x: -1000, opacity: 0 }}
+            className="w-2/12 max-h-screen overflow-y-scroll scrollbar-thin fixed top-14 bg-[#212121] pb-8 sidebar"
+          >
+            <ul className="flex flex-col border-b border-gray-700 border-dashed">
+              {mainLinks.map(({ icon, name }, index) => (
+                <MenuIconSidebar Icon={icon} name={name} key={index} />
+              ))}
+            </ul>
+            <ul className="flex flex-col border-b border-gray-700 border-dashed">
+              {secondaryLinks.map(({ icon, name }, index) => (
+                <MenuIconSidebar Icon={icon} name={name} key={index} />
+              ))}
+            </ul>
+            <ul className="flex flex-col border-b border-gray-700 border-dashed">
+              {subscriptionLinks.map(({ icon, name }, index) => (
+                <MenuIconSidebar Icon={icon} name={name} key={index} />
+              ))}
+            </ul>
+            <ul className="flex flex-col border-b border-gray-700">
+              {helpLinks.map(({ icon, name }, index) => (
+                <MenuIconSidebar Icon={icon} name={name} key={index} />
+              ))}
+            </ul>
+            <ul className="flex gap-2 flex-wrap text-sm p-4 text-zinc-400">
+              {textLinks[0].map((name) => {
+                return <li key={name}>{name}</li>
+              })}
+            </ul>
+            <ul className="flex gap-2 flex-wrap text-sm p-4 text-zinc-400">
+              {textLinks[1].map((name) => {
+                return <li key={name}>{name}</li>
+              })}
+            </ul>
+            <span className="px-4 text-sm text-zinc-400">
+              &copy; 2022 Google
+            </span>
+            <br />
+            <p className="px-4 pt-3 text-sm text-zinc-400">
+              This clone is for educational purpose only.
+            </p>
+          </motion.aside>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 

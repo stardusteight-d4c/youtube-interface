@@ -1,7 +1,6 @@
 import {
   MdHomeFilled,
   MdOutlineSlowMotionVideo,
-  MdSubscriptions,
   MdOutlineVideoLibrary,
   MdHistory,
   MdOutlineSmartDisplay,
@@ -16,6 +15,7 @@ import {
 import { TbMusic, TbDeviceGamepad2 } from 'react-icons/tb'
 import { FaRegCompass } from 'react-icons/fa'
 import { GiFilmStrip } from 'react-icons/gi'
+import { BsCollectionPlay } from 'react-icons/bs'
 
 export const mainLinks = [
   {
@@ -31,7 +31,7 @@ export const mainLinks = [
     name: 'Shorts',
   },
   {
-    icon: MdSubscriptions,
+    icon: BsCollectionPlay,
     name: 'Subscriptions',
   },
 ]
