@@ -31,7 +31,7 @@ const Navbar = ({ openMenu, setOpenMenu }: Props) => {
 
   return (
     <nav className="flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-50">
-      <div className="flex gap-8 items-center text-2xl">
+      <div className="flex gap-2 md:gap-8 items-center text-2xl">
         <div>
           <HiMenuAlt3
             className="cursor-pointer hover:opacity-80 duration-200 transition-all"
@@ -41,7 +41,7 @@ const Navbar = ({ openMenu, setOpenMenu }: Props) => {
         <Link to="/">
           <div className="flex gap-1 items-center justify-center">
             <img src="/youtube-logo.png" className="w-8 h-6" />
-            <span className="text-xl font-medium">YouTube</span>
+            <span className="hidden md:block text-xl font-medium">YouTube</span>
           </div>
         </Link>
       </div>
@@ -57,7 +57,7 @@ const Navbar = ({ openMenu, setOpenMenu }: Props) => {
               <input
                 type="text"
                 placeholder="Pesquisar"
-                className="w-96 bg-zinc-900 outline-none border-none"
+                className="w-20 md:w-96 bg-zinc-900 outline-none border-none"
                 value={searchTerm}
                 onChange={(e) => dispatch(changeSearchTerm(e.target.value))}
               />
@@ -73,15 +73,15 @@ const Navbar = ({ openMenu, setOpenMenu }: Props) => {
             </button>
           </div>
         </form>
-        <div className="text-xl p-3 bg-zinc-900 rounded-full">
-          <TiMicrophone className="cursor-pointer hover:opacity-80 duration-200 transition-all" />
+        <div className="text-xl p-3 bg-zinc-900 hidden md:block rounded-full">
+          <TiMicrophone className="hidden md:block cursor-pointer hover:opacity-80 duration-200 transition-all" />
         </div>
       </div>
       <div className="flex gap-5 items-center text-xl">
-        <BsCameraVideo className="cursor-pointer hover:opacity-80 duration-200 transition-all" />
-        <IoAppsSharp className="cursor-pointer hover:opacity-80 duration-200 transition-all" />
-        <div className="relative">
-          <BsBell className="cursor-pointer hover:opacity-80 duration-200 transition-all" />
+        <BsCameraVideo className="hidden md:block cursor-pointer hover:opacity-80 duration-200 transition-all" />
+        <IoAppsSharp className="hidden md:block cursor-pointer hover:opacity-80 duration-200 transition-all" />
+        <div className="relative hidden md:block">
+          <BsBell className="hidden md:block cursor-pointer hover:opacity-80 duration-200 transition-all" />
           <span className="absolute bottom-2 left-2 text-xs bg-red-600 rounded-full px-1">
             8+
           </span>

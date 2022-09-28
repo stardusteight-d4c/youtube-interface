@@ -33,8 +33,6 @@ const Home = (props: Props) => {
     }
   }, [dispatch])
 
-  console.log(openMenu)
-
   return (
     <div className="max-h-screen">
       <div className="h-[7.5vh]">
@@ -56,9 +54,9 @@ const Home = (props: Props) => {
           // >
           <motion.div
             layout
-            className={`md:grid md:col-start-3 ${
-              !openMenu && '!col-start-1 !col-span-12 mx-auto 2xl:w-[1500px]'
-            } col-span-1 md:col-span-10  gap-y-14 gap-x-8 2xl:gap-x-0 grid-cols-4 p-8`}
+            className={`grid md:col-start-3 ${
+              !openMenu && 'md:!col-start-1 md:!col-span-12 md:!mx-auto 2xl:w-[1500px]'
+            } grid-cols-1 md:col-span-10 gap-y-14 gap-x-8 2xl:gap-x-0 md:grid-cols-4 p-8`}
           >
             {videos.map((item: HomePageVideos, index) => {
               return <Card data={item} key={index} />
