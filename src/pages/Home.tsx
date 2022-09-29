@@ -22,6 +22,7 @@ const Home = (props: Props) => {
   const videos = mockDataHome
   const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
 
+
   useEffect(() => {
     dispatch(getHomePageVideos(false))
   }, [dispatch])
@@ -55,7 +56,7 @@ const Home = (props: Props) => {
           <motion.div
             layout
             transition={{ duration: 0.1 }}
-            className={style.gridContainer}
+            className="grid grid-cols-1 md:grid-cols-12"
           >
             <motion.div
               layout

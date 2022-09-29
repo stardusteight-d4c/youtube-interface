@@ -22,7 +22,7 @@ const MenuIconSidebar = ({ array }: Props) => {
           >
             <a href="#" className="flex items-center gap-5">
               <Icon className="text-xl" />
-              <span className="text-sm tracking-wider">{item.name}</span>
+              <span className={`${ item.name == 'Home' && '!text-white/90 font-bold pt-[3px]'} text-sm text-[#a8a8a8] tracking-wider`}>{item.name}</span>
             </a>
           </li>
         )

@@ -2,6 +2,7 @@ import { IconType } from "react-icons"
 
 export interface InitialState {
   openMenu: boolean
+  openMenuMobile: boolean
   videos: HomePageVideos[]
   currentPlaying: CurrentPlaying | null
   searchTerm: string

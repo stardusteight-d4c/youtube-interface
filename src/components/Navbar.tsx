@@ -5,21 +5,19 @@ import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 import { TiMicrophone } from 'react-icons/ti'
 import { BsCameraVideo, BsBell } from 'react-icons/bs'
 import { HiMenuAlt3 } from 'react-icons/hi'
-import { IoAppsSharp, IoCloseCircleOutline } from 'react-icons/io5'
+import { IoAppsSharp } from 'react-icons/io5'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { changeSearchTerm, clearSearchTerm, clearVideos, setOpenMenu } from '../store'
+import {
+  changeSearchTerm,
+  clearSearchTerm,
+  clearVideos,
+  setOpenMenu,
+  setOpenMenuMobile,
+} from '../store'
 import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = {}
-
-const style = {
-  wrapper: `flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-50`,
-  leftCointainer: `flex gap-2 md:gap-8 items-center text-2xl`,
-  menuIcon: `cursor-pointer hover:opacity-80 duration-200 transition-all`,
-  logoContainer: `flex gap-1 items-center justify-center`,
-  youtube: `hidden md:block text-xl font-medium`,
-  middleContainer: `flex items-center justify-center gap-5`,
-}
 
 const Navbar = ({}: Props) => {
   const location = useLocation()
@@ -35,23 +33,29 @@ const Navbar = ({}: Props) => {
     }
   }
 
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
   return (
-    <nav className={style.wrapper}>
-      <div className={style.leftCointainer}>
+    <nav className="flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-50">
+      <div className="flex gap-2 md:gap-8 items-center text-2xl">
         <div>
           <HiMenuAlt3
-            className={style.menuIcon}
-            onClick={() => dispatch(setOpenMenu())}
+            className="cursor-pointer hover:opacity-80 duration-200 transition-all"
+            onClick={
+              isTabletOrMobile
+                ? () => dispatch(setOpenMenuMobile())
+                : () => dispatch(setOpenMenu())
+            }
           />
         </div>
         <Link to="/">
-          <div className={style.logoContainer}>
+          <div className="flex gap-1 items-center justify-center">
             <img src="/youtube-logo.png" className="w-8 h-6" />
-            <span className={style.youtube}>YouTube</span>
+            <span className="hidden md:block text-xl font-medium">YouTube</span>
           </div>
         </Link>
       </div>
-      <div className={style.middleContainer}>
+      <div className="flex items-center justify-center gap-5">
         <form
           onSubmit={(e) => {
             e.preventDefault()

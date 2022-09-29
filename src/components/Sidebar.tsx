@@ -9,11 +9,13 @@ import { textLinks } from './fragments/sidebar'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAppSelector } from '../store/hooks'
 import MenuIconSidebar from './fragments/MenuIconSidebar'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = {}
 
 const Sidebar = ({}: Props) => {
   const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
+  const openMenuMobile = useAppSelector((state) => state.youtubeApp.openMenuMobile)
   const menuItemsArrayLists = [
     mainLinks,
     secondaryLinks,
@@ -21,9 +23,17 @@ const Sidebar = ({}: Props) => {
     helpLinks,
   ]
 
+  // initial state of the menu is changed according to the view port
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+  const menuState = isTabletOrMobile ? openMenuMobile : openMenu
+
+  console.log('openMenu:', openMenu, 'openMenuMobile:', openMenuMobile);
+  
+  console.log('menuState:', menuState);
+  
   return (
     <AnimatePresence>
-      {openMenu && (
+      {menuState && (
         <motion.aside
           initial={{ x: -1000, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
