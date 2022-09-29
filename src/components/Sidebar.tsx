@@ -6,14 +6,18 @@ import {
   helpLinks,
 } from './fragments/sidebar'
 import { textLinks } from './fragments/sidebar'
-import MenuIconSidebar from './fragments/MenuIconSidebar'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useAppSelector } from '../store/hooks'
+import MenuIconSidebar from './fragments/MenuIconSidebar'
 
-type Props = {
-  openMenu: boolean
-}
+type Props = {}
 
-const Sidebar = ({ openMenu }: Props) => {
+const Sidebar = ({}: Props) => {
+  const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
+  const arrays = [mainLinks, secondaryLinks, subscriptionLinks, helpLinks]
+
+  // console.log('arrays', arrays.forEach())
+
   return (
     <AnimatePresence>
       {openMenu && (
@@ -22,28 +26,15 @@ const Sidebar = ({ openMenu }: Props) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4 }}
           exit={{ x: -1000, opacity: 0 }}
-          className="md:w-2/12 w-1/2 z-20 max-h-screen overflow-y-scroll scrollbar-thin fixed top-14 bg-[#212121] pb-8 sidebar"
+          className="md:w-2/12 w-1/2 z-20 h-screen overflow-y-scroll scrollbar-hide fixed top-14 bg-[#212121] pb-8 sidebar"
         >
-          <ul className="flex flex-col border-b border-gray-700 border-dashed">
-            {mainLinks.map(({ icon, name }, index) => (
-              <MenuIconSidebar Icon={icon} name={name} key={index} />
-            ))}
-          </ul>
-          <ul className="flex flex-col border-b border-gray-700 border-dashed">
-            {secondaryLinks.map(({ icon, name }, index) => (
-              <MenuIconSidebar Icon={icon} name={name} key={index} />
-            ))}
-          </ul>
-          <ul className="flex flex-col border-b border-gray-700 border-dashed">
-            {subscriptionLinks.map(({ icon, name }, index) => (
-              <MenuIconSidebar Icon={icon} name={name} key={index} />
-            ))}
-          </ul>
-          <ul className="flex flex-col border-b border-gray-700">
-            {helpLinks.map(({ icon, name }, index) => (
-              <MenuIconSidebar Icon={icon} name={name} key={index} />
-            ))}
-          </ul>
+          <>
+            {arrays.forEach((array) => {
+              console.log('sidebar', array)
+
+              return <MenuIconSidebar array={array} />
+            })}
+          </>
           <ul className="flex gap-2 flex-wrap text-sm p-4 text-zinc-400">
             {textLinks[0].map((name) => {
               return <li key={name}>{name}</li>

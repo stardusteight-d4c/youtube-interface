@@ -7,15 +7,12 @@ import { BsCameraVideo, BsBell } from 'react-icons/bs'
 import { HiMenuAlt3 } from 'react-icons/hi'
 import { IoAppsSharp, IoCloseCircleOutline } from 'react-icons/io5'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { changeSearchTerm, clearSearchTerm, clearVideos } from '../store'
+import { changeSearchTerm, clearSearchTerm, clearVideos, setOpenMenu } from '../store'
 import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos'
 
-type Props = {
-  openMenu: boolean
-  setOpenMenu: (value: boolean | ((prevVar: boolean) => boolean)) => void
-}
+type Props = {}
 
-const Navbar = ({ openMenu, setOpenMenu }: Props) => {
+const Navbar = ({}: Props) => {
   const location = useLocation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -35,7 +32,7 @@ const Navbar = ({ openMenu, setOpenMenu }: Props) => {
         <div>
           <HiMenuAlt3
             className="cursor-pointer hover:opacity-80 duration-200 transition-all"
-            onClick={() => setOpenMenu(!openMenu)}
+            onClick={() => dispatch(setOpenMenu())}
           />
         </div>
         <Link to="/">

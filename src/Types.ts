@@ -1,4 +1,7 @@
+import { IconType } from "react-icons"
+
 export interface InitialState {
+  openMenu: boolean
   videos: HomePageVideos[]
   currentPlaying: CurrentPlaying | null
   searchTerm: string
@@ -60,4 +63,11 @@ export interface Item {
     channelId: string
   }
   contentDetails: { upload: { videoId: string } }
+}
+
+export interface MenuIcon {
+  array: {
+    Icon: IconType
+    name: string
+  }[]
 }

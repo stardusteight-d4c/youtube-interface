@@ -1,4 +1,4 @@
-export const mockData = [
+export const mockDataHome = [
   {
     videoId: 'NLDCzuSexnE',
     videoTitle: 'Did NOT See the Musical Number Coming | Overlord IV',
@@ -688,6 +688,185 @@ export const mockData = [
       image:
         'https://yt3.ggpht.com/ytc/AMLnZu_VABDsdqXChjNP-S656GrDkXHm0owWup7bcsoZgQ=s88-c-k-c0x00ffffff-no-rj',
       name: 'Crunchyroll Collection',
+    },
+  },
+]
+
+export const mockDataSearchTerm = [
+  {
+    videoId: 'LlLdzOHDfJo',
+    videoTitle: 'SPIDER-MAN PS4 - O Início de Gameplay, em Português PT-BR!',
+    videoDescription:
+      'Compre Spider-Man de PS4 aqui: http://baix.in/SpiderManPS4 Bilômetro, baixe GRÁTIS e economize ...',
+    videoThumbnail: 'https://i.ytimg.com/vi/LlLdzOHDfJo/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=LlLdzOHDfJo',
+    videoDuration: '45:26',
+    videoViews: '6M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu_4zsVlenlnnMvBAzVPWcETxZoTjKuGGj1BvI45TA=s88-c-k-c0x00ffffff-no-rj',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'LF5n5cS5yGA',
+    videoTitle:
+      'SPIDER MAN (PS4) - Parte 1: Peter Parker!!! [ Playstation 4 Pro - Playthrough ]',
+    videoDescription:
+      'Siga a Gloriosa Picanha!!! [Twitter ✓ - http://goo.gl/MjM5at ] - [Facebook ✓ - http://goo.gl/WtxxY3] - [Instagram ...',
+    videoThumbnail: 'https://i.ytimg.com/vi/LF5n5cS5yGA/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=LF5n5cS5yGA',
+    videoDuration: '4:10:48',
+    videoViews: '2M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCrR3Pb60RA7lks1zV_LYauw',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu_CKOTen6WmD-t0jd5LzPXGaXppMFjyvzixFh-eRQ=s88-c-k-c0x00ffffff-no-rj',
+      name: 'Lucky Salamander',
+    },
+  },
+  {
+    videoId: 'Kk5lHCppbMk',
+    videoTitle: 'Spider-Man PS4 100% Longplay',
+    videoDescription:
+      "Check out my PS5 longplay of the game here: https://www.youtube.com/watch?v=oF4HneqTFuw The PS5 longplay doesn't 100% ...",
+    videoThumbnail: 'https://i.ytimg.com/vi/Kk5lHCppbMk/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=Kk5lHCppbMk',
+    videoDuration: '21:36:16',
+    videoViews: '6M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCwyYcL8iQUbhinE24t1O4kQ',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu_Z8IVZpCj_Zgki2HatfRFCS6idHwy3uofjz5ie=s88-c-k-c0x00ffffff-no-rj',
+      name: 'Spazbo4',
+    },
+  },
+  {
+    videoId: 'oYTR2reAaNg',
+    videoTitle:
+      'SPIDER-MAN PS4 – Full Gameplay Walkthrough / No Commentary 【1080p HD / Full Game】',
+    videoDescription:
+      "BUY SPIDER-MAN HERE: https://amzn.to/2RzP6jP You are watching Marvel's Spiderman PS4 Full Walkthrough with no ...",
+    videoThumbnail: 'https://i.ytimg.com/vi/oYTR2reAaNg/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=oYTR2reAaNg',
+    videoDuration: '9:54:15',
+    videoViews: '5M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCiZVMOinTQGb8HQu53VbV4Q',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu_CLFD0QhoBN8Mvo1o5ACwyP9VoaeATaQkaqgbq=s88-c-k-c0x00ffffff-no-rj',
+      name: "Gamer's Little Playground",
+    },
+  },
+  {
+    videoId: 'eEPG4TMhwtk',
+    videoTitle:
+      'Marvel&#39;s Spider-Man (2018) - Open World Free Roam Gameplay (PS4 HD) [1080p60FPS]',
+    videoDescription:
+      "Marvel's Spider-Man (2018) - Open World Free Roam Gameplay (PS4 HD) [1080p60FPS]. Specs: Playstation 4 Pro ...",
+    videoThumbnail: 'https://i.ytimg.com/vi/eEPG4TMhwtk/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=eEPG4TMhwtk',
+    videoDuration: '9:33',
+    videoViews: '2M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCIw5rbXUrtk31t20Ap5817w',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu8RfIgOhuPdMBLVa8F_LYGzL-xNlLBPPwZ00Hm78w=s88-c-k-c0x00ffffff-no-rj',
+      name: 'Throneful',
+    },
+  },
+  {
+    videoId: 'pYA0yATX6GQ',
+    videoTitle: 'A QUEDA do GUINDASTE GIGANTE!!! - (SPIDER-MAN PS4)',
+    videoDescription:
+      'Gameplay do novo SPIDER-MAN PS4, jogo incrível em Mundo Aberto, com muitos desafios e missões épicas. Acompanhe minha ...',
+    videoThumbnail: 'https://i.ytimg.com/vi/pYA0yATX6GQ/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=pYA0yATX6GQ',
+    videoDuration: '26:06',
+    videoViews: '5M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCHuZmQ0lSW8TG81dVZZh5rw',
+      image:
+        'https://yt3.ggpht.com/uBi9-XKfBxdnjPlcp-kYnhsYju6-Pkv4S_bnifel51a78--LQacH80N3aFOUgs9cWJfhi3AJNY4=s88-c-k-c0x00ffffff-no-rj',
+      name: 'LipaoGamer',
+    },
+  },
+  {
+    videoId: 'VPmiGfRxQns',
+    videoTitle:
+      'Spider-Man PS4 - All Boss Fights &amp; DLC (No Damage) on Ultimate Difficulty',
+    videoDescription:
+      'Be amazed as I battle all the main & DLC Boss fights from Spider-Man PS4 on Ultimate Difficulty without taking any damage at all!',
+    videoThumbnail: 'https://i.ytimg.com/vi/VPmiGfRxQns/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=VPmiGfRxQns',
+    videoDuration: '1:58:47',
+    videoViews: '9M',
+    videoAge: '3 years',
+    channelInfo: {
+      id: 'UCZAE8vNjCbaUKqQrMPFfZFw',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu8OAH-TmvWM0H9B9N9aLxcwiBySii_3_f6-LYmdGA=s88-c-k-c0x00ffffff-no-rj',
+      name: 'Mat579thew',
+    },
+  },
+  {
+    videoId: 'J-Fu99oRfwg',
+    videoTitle: 'ESSA CIDADE PRECISA DE UM HERÓI! - Spider-Man PS4',
+    videoDescription:
+      'Passando o sarrafo nos malucos tudo! Aranha é ruim bicho gruda os malucos na teia! Obrigado por assistir. Inscreva-se: ...',
+    videoThumbnail: 'https://i.ytimg.com/vi/J-Fu99oRfwg/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=J-Fu99oRfwg',
+    videoDuration: '13:48',
+    videoViews: '9M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCYzp8-P162Em-3uZnCuGJOg',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu8GCKph3rYO1PVgvOzJlP1EDginKvwCUH2RrWs7dw=s88-c-k-c0x00ffffff-no-rj',
+      name: 'Games EduUu',
+    },
+  },
+  {
+    videoId: 'yCVOCSlzQno',
+    videoTitle:
+      'SPIDER-MAN PS4 Walkthrough Gameplay Part 1 - INTRO (Marvel&#39;s Spider-Man)',
+    videoDescription:
+      "PS4 Spider-Man (Marvel's Spider-Man) Gameplay Walkthrough Part 1 for PS4 Pro includes a Review, Intro and Campaign ...",
+    videoThumbnail: 'https://i.ytimg.com/vi/yCVOCSlzQno/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=yCVOCSlzQno',
+    videoDuration: '45:47',
+    videoViews: '18M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCpqXJOEqGS-TCnazcHCo0rA',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu_2_BRu0Tvluguc2EWjA-pgkjdH3IXBelsHDjQfMA=s88-c-k-c0x00ffffff-no-rj',
+      name: 'theRadBrad',
+    },
+  },
+  {
+    videoId: 'eEPG4TMhwtk',
+    videoTitle:
+      'Marvel&#39;s Spider-Man (2018) - Open World Free Roam Gameplay (PS4 HD) [1080p60FPS]',
+    videoDescription:
+      "Marvel's Spider-Man (2018) - Open World Free Roam Gameplay (PS4 HD) [1080p60FPS]. Specs: Playstation 4 Pro ...",
+    videoThumbnail: 'https://i.ytimg.com/vi/eEPG4TMhwtk/mqdefault.jpg',
+    videoLink: 'https://www.youtube.com/watch?v=eEPG4TMhwtk',
+    videoDuration: '9:33',
+    videoViews: '2M',
+    videoAge: '4 years',
+    channelInfo: {
+      id: 'UCIw5rbXUrtk31t20Ap5817w',
+      image:
+        'https://yt3.ggpht.com/ytc/AMLnZu8RfIgOhuPdMBLVa8F_LYGzL-xNlLBPPwZ00Hm78w=s88-c-k-c0x00ffffff-no-rj',
+      name: 'Throneful',
     },
   },
 ]

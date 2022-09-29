@@ -8,24 +8,23 @@ import { clearVideos } from '../store'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { getHomePageVideos } from '../store/reducers/getHomePageVideos'
 import { HomePageVideos } from '../Types'
-import { mockData } from '../../mockData'
+import { mockDataHome } from '../../mockData'
 import { motion, AnimatePresence } from 'framer-motion'
+
+// production: const videos = useAppSelector((state) => state.youtubeApp.data)
+// development: const videos = mockData
 
 type Props = {}
 
-// Mocka estes dados!!! Se não a api vai atingir a cota!! pega os primeiros dados que vir da api
-
 const Home = (props: Props) => {
-  const [openMenu, setOpenMenu] = useState(true)
-
   const dispatch = useAppDispatch()
   // const videos = useAppSelector((state) => state.youtubeApp.videos)
-  const videos = mockData
+  const videos = mockDataHome
+  const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
 
-  // useEffect(() => {
-  //   dispatch(getHomePageVideos(false))
-  //   // console.log(videos)
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(getHomePageVideos(false))
+  }, [dispatch])
 
   useEffect(() => {
     return () => {
@@ -33,40 +32,46 @@ const Home = (props: Props) => {
     }
   }, [dispatch])
 
+  const style = {
+    gridContainer: `grid grid-cols-1 md:grid-cols-12`,
+    openMenuLayout: `grid md:col-start-3 grid-cols-1 md:col-span-10 gap-y-14 gap-x-8 md:grid-cols-4 p-8`,
+    notOpenMenuLayout: `md:!col-start-1 md:!col-span-12 md:!mx-auto 2xl:w-[1500px]`,
+  }
+
   return (
-    <div className="max-h-screen">
+    <div className="h-screen overflow-hidden">
       <div className="h-[7.5vh]">
-        <Navbar openMenu={openMenu} setOpenMenu={setOpenMenu} />
+        <Navbar />
       </div>
-      <Sidebar openMenu={openMenu} />
-      <motion.div
-        layout
-        transition={{ duration: 0.1 }}
-        className="grid grid-cols-1 md:grid-cols-12"
-      >
-        {videos.length ? (
-          // <InfiniteScroll
-          //   dataLength={videos.length}
-          //   next={() => dispatch(getHomePageVideos(true))}
-          //   hasMore={videos.length < 500}
-          //   loader={<Spinner />}
-          //   height={650}
-          // >
+      <Sidebar />
+      {videos.length ? (
+        <InfiniteScroll
+          dataLength={videos.length}
+          next={() => dispatch(getHomePageVideos(true))}
+          hasMore={videos.length < 500}
+          loader={<Spinner />}
+          height="100vh"
+        >
           <motion.div
             layout
-            className={`grid md:col-start-3 ${
-              !openMenu && 'md:!col-start-1 md:!col-span-12 md:!mx-auto 2xl:w-[1500px]'
-            } grid-cols-1 md:col-span-10 gap-y-14 gap-x-8 2xl:gap-x-0 md:grid-cols-4 p-8`}
+            transition={{ duration: 0.1 }}
+            className={style.gridContainer}
           >
-            {videos.map((item: HomePageVideos, index) => {
-              return <Card data={item} key={index} />
-            })}
+            <motion.div
+              layout
+              className={`${style.openMenuLayout} ${
+                !openMenu && style.notOpenMenuLayout
+              }`}
+            >
+              {videos.map((item: HomePageVideos, index) => {
+                return <Card data={item} key={index} />
+              })}
+            </motion.div>
           </motion.div>
-        ) : (
-          // </InfiniteScroll>
-          <Spinner />
-        )}
-      </motion.div>
+        </InfiniteScroll>
+      ) : (
+        <Spinner />
+      )}
     </div>
   )
 }

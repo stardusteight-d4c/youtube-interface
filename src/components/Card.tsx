@@ -8,7 +8,7 @@ type Props = {
 
 const Card = ({ data }: Props) => {
   return (
-    <div className="flex w-full gap-3 2xl:w-80 flex-col transform hover:scale-105 duration-500 transition-all">
+    <div className="grid col-span-1 w-full gap-3 transform hover:scale-105 duration-500 transition-all">
       <div className="relative">
         <span className="absolute bottom-1 right-1 text-sm bg-black/80 rounded-sm px-1 py-0.5 z-10">
           {data.videoDuration}
@@ -16,7 +16,7 @@ const Card = ({ data }: Props) => {
         <Link to={`/watch/${data.videoId}`}>
           <img
             src={data.videoThumbnail}
-            className="w-full 2xl:w-80 2xl:h-40"
+            className="w-full"
             alt="thumbnail/img"
           />
         </Link>
