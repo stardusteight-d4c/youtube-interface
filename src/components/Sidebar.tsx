@@ -14,9 +14,12 @@ type Props = {}
 
 const Sidebar = ({}: Props) => {
   const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
-  const arrays = [mainLinks, secondaryLinks, subscriptionLinks, helpLinks]
-
-  // console.log('arrays', arrays.forEach())
+  const menuItemsArrayLists = [
+    mainLinks,
+    secondaryLinks,
+    subscriptionLinks,
+    helpLinks,
+  ]
 
   return (
     <AnimatePresence>
@@ -28,21 +31,19 @@ const Sidebar = ({}: Props) => {
           exit={{ x: -1000, opacity: 0 }}
           className="md:w-2/12 w-1/2 z-20 h-screen overflow-y-scroll scrollbar-hide fixed top-14 bg-[#212121] pb-8 sidebar"
         >
-          <>
-            {arrays.forEach((array) => {
-              console.log('sidebar', array)
-
-              return <MenuIconSidebar array={array} />
-            })}
-          </>
+          {menuItemsArrayLists.map((arrayList, index) => (
+            <ul className="flex flex-col border-b border-gray-700 border-dashed">
+              <MenuIconSidebar array={arrayList} key={index} />
+            </ul>
+          ))}
           <ul className="flex gap-2 flex-wrap text-sm p-4 text-zinc-400">
-            {textLinks[0].map((name) => {
-              return <li key={name}>{name}</li>
+            {textLinks[0].map((name, index) => {
+              return <li key={index}>{name}</li>
             })}
           </ul>
           <ul className="flex gap-2 flex-wrap text-sm p-4 text-zinc-400">
-            {textLinks[1].map((name) => {
-              return <li key={name}>{name}</li>
+            {textLinks[1].map((name, index) => {
+              return <li key={index}>{name}</li>
             })}
           </ul>
           <span className="px-4 text-sm text-zinc-400">&copy; 2022 Google</span>

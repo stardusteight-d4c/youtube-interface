@@ -1,27 +1,33 @@
 import React from 'react'
-// import { MenuIcon } from '../../Types'
+import { icons, IconType } from 'react-icons'
 
-type Props = {}
+type Props = {
+  array: {
+    icon: IconType
+    name: string
+  }[]
+}
 
-const MenuIconSidebar = (array): Any => {
-  console.log(array)
-
+const MenuIconSidebar = ({ array }: Props) => {
   return (
-    <ul className="flex flex-col border-b border-gray-700 border-dashed">
-      {array.map(({ Icon, name }) => (
-        <li
-          key={name}
-          className={`pl-6 py-3 hover:bg-[#383838] ${
-            name == 'Home' && 'bg-[#383838]'
-          }`}
-        >
-          <a href="#" className="flex items-center gap-5">
-            <Icon className="text-xl" />
-            <span className="text-sm tracking-wider">{name}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <>
+      {array.map((item, index) => {
+        const Icon = item.icon
+        return (
+          <li
+            key={index}
+            className={`pl-6 py-3 hover:bg-[#383838] ${
+              item.name == 'Home' && 'bg-[#383838]'
+            }`}
+          >
+            <a href="#" className="flex items-center gap-5">
+              <Icon className="text-xl" />
+              <span className="text-sm tracking-wider">{item.name}</span>
+            </a>
+          </li>
+        )
+      })}
+    </>
   )
 }
 

@@ -65,9 +65,3 @@ export interface Item {
   contentDetails: { upload: { videoId: string } }
 }
 
-export interface MenuIcon {
-  array: {
-    Icon: IconType
-    name: string
-  }[]
-}

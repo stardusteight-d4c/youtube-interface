@@ -12,6 +12,15 @@ import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos'
 
 type Props = {}
 
+const style = {
+  wrapper: `flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-50`,
+  leftCointainer: `flex gap-2 md:gap-8 items-center text-2xl`,
+  menuIcon: `cursor-pointer hover:opacity-80 duration-200 transition-all`,
+  logoContainer: `flex gap-1 items-center justify-center`,
+  youtube: `hidden md:block text-xl font-medium`,
+  middleContainer: `flex items-center justify-center gap-5`,
+}
+
 const Navbar = ({}: Props) => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -27,22 +36,22 @@ const Navbar = ({}: Props) => {
   }
 
   return (
-    <nav className="flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-50">
-      <div className="flex gap-2 md:gap-8 items-center text-2xl">
+    <nav className={style.wrapper}>
+      <div className={style.leftCointainer}>
         <div>
           <HiMenuAlt3
-            className="cursor-pointer hover:opacity-80 duration-200 transition-all"
+            className={style.menuIcon}
             onClick={() => dispatch(setOpenMenu())}
           />
         </div>
         <Link to="/">
-          <div className="flex gap-1 items-center justify-center">
+          <div className={style.logoContainer}>
             <img src="/youtube-logo.png" className="w-8 h-6" />
-            <span className="hidden md:block text-xl font-medium">YouTube</span>
+            <span className={style.youtube}>YouTube</span>
           </div>
         </Link>
       </div>
-      <div className="flex items-center justify-center gap-5">
+      <div className={style.middleContainer}>
         <form
           onSubmit={(e) => {
             e.preventDefault()

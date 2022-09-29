@@ -19,80 +19,80 @@ import { BsCollectionPlay } from 'react-icons/bs'
 
 export const mainLinks = [
   {
-    Icon: MdHomeFilled,
+    icon: MdHomeFilled,
     name: 'Home',
   },
   {
-    Icon: FaRegCompass,
+    icon: FaRegCompass,
     name: 'Explore',
   },
   {
-    Icon: MdOutlineSlowMotionVideo,
+    icon: MdOutlineSlowMotionVideo,
     name: 'Shorts',
   },
   {
-    Icon: BsCollectionPlay,
+    icon: BsCollectionPlay,
     name: 'Subscriptions',
   },
 ]
 
 export const secondaryLinks = [
   {
-    Icon: MdOutlineVideoLibrary,
+    icon: MdOutlineVideoLibrary,
     name: 'Library',
   },
   {
-    Icon: MdHistory,
+    icon: MdHistory,
     name: 'History',
   },
   {
-    Icon: MdOutlineSmartDisplay,
+    icon: MdOutlineSmartDisplay,
     name: 'Your Videos',
   },
   {
-    Icon: MdOutlineWatchLater,
+    icon: MdOutlineWatchLater,
     name: 'Watch Later',
   },
   {
-    Icon: MdThumbUpOffAlt,
+    icon: MdThumbUpOffAlt,
     name: 'Liked Videos',
   },
 ]
 
 export const subscriptionLinks = [
   {
-    Icon: TbMusic,
+    icon: TbMusic,
     name: 'Music',
   },
   {
-    Icon: MdOutlineSportsVolleyball,
+    icon: MdOutlineSportsVolleyball,
     name: 'Sport',
   },
   {
-    Icon: TbDeviceGamepad2,
+    icon: TbDeviceGamepad2,
     name: 'Gaming',
   },
   {
-    Icon: GiFilmStrip,
+    icon: GiFilmStrip,
     name: 'Films',
   },
 ]
 
 export const helpLinks = [
   {
-    Icon: MdSettings,
+    icon: MdSettings,
     name: 'Settings',
   },
   {
-    Icon: MdOutlinedFlag,
+    icon: MdOutlinedFlag,
     name: 'Report history',
   },
   {
-    Icon: MdOutlineHelpOutline,
+    icon: MdOutlineHelpOutline,
     name: 'Help',
   },
   {
-    Icon: MdOutlineFeedback,
+    icon: MdOutlineFeedback,
     name: 'Send feedback',
   },
 ]
