@@ -10,6 +10,14 @@ import { getHomePageVideos } from '../store/reducers/getHomePageVideos'
 import { HomePageVideos } from '../Types'
 import { mockDataHome } from '../../mockData'
 import { motion, AnimatePresence } from 'framer-motion'
+import Hashtag from '../components/fragments/Hashtag'
+import { tags } from '../components/fragments/sidebar'
+
+import { Virtual } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/virtual'
 
 // production: const videos = useAppSelector((state) => state.youtubeApp.data)
 // development: const videos = mockData
@@ -21,7 +29,6 @@ const Home = (props: Props) => {
   // const videos = useAppSelector((state) => state.youtubeApp.videos)
   const videos = mockDataHome
   const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
-
 
   useEffect(() => {
     dispatch(getHomePageVideos(false))
@@ -39,12 +46,37 @@ const Home = (props: Props) => {
     notOpenMenuLayout: `md:!col-start-1 md:!col-span-12 md:!mx-auto 2xl:w-[1500px]`,
   }
 
+  const slidesPerView = openMenu ? 11 : 12
+
   return (
     <div className="h-screen overflow-hidden">
       <div className="h-[7.5vh]">
         <Navbar />
       </div>
       <Sidebar />
+      <motion.div
+        layout
+        transition={{ duration: 0.5 }}
+        className={`${
+          !openMenu && '!w-screen'
+        } hidden h-14 px-5 md:flex col-start-3 absolute right-0 top-14 bg-[#212121] border-y z-40 border-[#aaaaaa]/20 w-[85vw]`}
+      >
+        <div className="absolute right-0 z-50 w-[100px] h-14 bg-gradient-to-l to-transparent via-[#212121] from-[#212121]" />
+        <div className="absolute left-1 z-50 w-[50px] h-14 bg-gradient-to-r to-transparent via-[#212121] from-[#212121]" />
+        <Swiper
+          modules={[Virtual]}
+          virtual
+          spaceBetween={4}
+          slidesPerView={slidesPerView}
+          className="!min-w-full !w-screen"
+        >
+          {tags.map((tag, index) => (
+            <SwiperSlide key={tag} virtualIndex={index} className="!max-w-fit">
+              <Hashtag title={tag} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </motion.div>
       {videos.length ? (
         <InfiniteScroll
           dataLength={videos.length}
@@ -52,6 +84,7 @@ const Home = (props: Props) => {
           hasMore={videos.length < 500}
           loader={<Spinner />}
           height="100vh"
+          className="scrollbar-hide md:mt-16"
         >
           <motion.div
             layout

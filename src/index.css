@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-roboto antialiased scroll-smooth;
+    @apply font-roboto antialiased scroll-smooth scrollbar-hide;
   }
   ::-webkit-scrollbar {
     @apply bg-transparent w-2;

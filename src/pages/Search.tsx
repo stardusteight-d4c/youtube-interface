@@ -10,6 +10,7 @@ import { HomePageVideos } from '../Types'
 import { useNavigate } from 'react-router-dom'
 import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos'
 import { mockDataSearchTerm } from '../../mockData'
+import { motion } from 'framer-motion'
 
 export default function Search() {
   const navigate = useNavigate()
@@ -17,6 +18,7 @@ export default function Search() {
   // const videos = useAppSelector((state) => state.youtubeApp.videos)
   const videos = mockDataSearchTerm
   const searchTerm = useAppSelector((state) => state.youtubeApp.searchTerm)
+  const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
 
   useEffect(() => {
     dispatch(clearVideos())
@@ -33,15 +35,24 @@ export default function Search() {
       </div>
       <Sidebar />
       <div className="flex h-[92.5vh]">
-        <div className="max-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-12">
+        <motion.div
+          layout
+          transition={{ duration: 0.1 }}
+          className="h-screen overflow-y-scroll overflow-x-hidden grid grid-cols-1 md:grid-cols-12"
+        >
           {videos.length ? (
-            <div className="py-8 pl-8 grid col-start-3 col-span-12 gap-5 w-full">
+            <motion.div
+              layout
+              className={`${
+                !openMenu && '!col-start-1'
+              } py-8 pl-8 grid col-start-3 col-span-12 gap-5 w-screen`}
+            >
               <InfiniteScroll
                 dataLength={videos.length}
                 next={() => dispatch(getSearchPageVideos(true))}
                 hasMore={videos.length < 500}
                 loader={<Spinner />}
-                height={600}
+                height="100vh"
               >
                 {videos.map((item: HomePageVideos) => {
                   return (
@@ -51,11 +62,11 @@ export default function Search() {
                   )
                 })}
               </InfiniteScroll>
-            </div>
+            </motion.div>
           ) : (
             <Spinner />
           )}
-        </div>
+        </motion.div>
       </div>
     </>
   )

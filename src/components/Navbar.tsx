@@ -36,7 +36,7 @@ const Navbar = ({}: Props) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   return (
-    <nav className="flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-50">
+    <nav className="flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-40">
       <div className="flex gap-2 md:gap-8 items-center text-2xl">
         <div>
           <HiMenuAlt3
@@ -62,12 +62,12 @@ const Navbar = ({}: Props) => {
             handleSearch()
           }}
         >
-          <div className="flex bg-zinc-900 items-center h-10 px-4 pr-0">
+          <div className="flex bg-[#121212] items-center h-10 px-4 pr-0">
             <div className="flex gap-4 items-center pr-5">
               <input
                 type="text"
                 placeholder="Pesquisar"
-                className="w-20 md:w-96 bg-zinc-900 outline-none border-none"
+                className="w-20 md:w-96 bg-[#121212] outline-none border-none"
                 value={searchTerm}
                 onChange={(e) => dispatch(changeSearchTerm(e.target.value))}
               />

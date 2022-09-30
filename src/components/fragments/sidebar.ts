@@ -115,3 +115,19 @@ export const textLinks = [
     'Test new features',
   ],
 ]
+
+export const tags = [
+  'All',
+  'Live',
+  'Game',
+  'Lofi',
+  'Music',
+  'Trailer',
+  'Linux',
+  'Anime',
+  'React',
+  'Films',
+  'Python',
+  'Blender',
+  'Shorts',
+]
