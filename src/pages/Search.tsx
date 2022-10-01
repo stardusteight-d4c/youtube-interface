@@ -12,6 +12,7 @@ import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos'
 import { mockDataSearchTerm } from '../../mockData'
 import { motion } from 'framer-motion'
 
+
 export default function Search() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
