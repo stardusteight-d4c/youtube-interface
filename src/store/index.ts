@@ -6,8 +6,8 @@ import { getSearchPageVideos } from './reducers/getSearchPageVideos'
 import { getVideoDetails } from './reducers/getVideoDetails'
 
 const initialState: InitialState = {
-  openMenu: true,
-  openMenuMobile: false,
+  initialOpenMenu: true,
+  initialCloseMenu: false,
   videos: [],
   currentPlaying: null,
   searchTerm: '',
@@ -20,11 +20,11 @@ const YoutubeSlice = createSlice({
   name: 'youtubeApp',
   initialState,
   reducers: {
-    setOpenMenu: (state) => {
-      state.openMenu = !state.openMenu
+    handleInitialOpenMenu: (state) => {
+      state.initialOpenMenu = !state.initialOpenMenu
     },
-    setOpenMenuMobile: (state) => {
-      state.openMenuMobile = !state.openMenuMobile
+    handleInitialCloseMenu: (state) => {
+      state.initialCloseMenu = !state.initialCloseMenu
     },
     clearVideos: (state) => {
       state.videos = []
@@ -59,8 +59,13 @@ export const store = configureStore({
   reducer: { youtubeApp: YoutubeSlice.reducer },
 })
 
-export const { setOpenMenu, setOpenMenuMobile, clearVideos, changeSearchTerm, clearSearchTerm } =
-  YoutubeSlice.actions
+export const {
+  handleInitialOpenMenu,
+  handleInitialCloseMenu,
+  clearVideos,
+  changeSearchTerm,
+  clearSearchTerm,
+} = YoutubeSlice.actions
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

@@ -28,7 +28,7 @@ const Home = (props: Props) => {
   const dispatch = useAppDispatch()
   // const videos = useAppSelector((state) => state.youtubeApp.videos)
   const videos = mockDataHome
-  const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
+  const openMenu = useAppSelector((state) => state.youtubeApp.initialOpenMenu)
 
   useEffect(() => {
     dispatch(getHomePageVideos(false))
@@ -50,7 +50,7 @@ const Home = (props: Props) => {
 
   return (
     <div className="h-screen overflow-hidden">
-      <div className="h-[7.5vh]">
+      <div className="h-[5.3vh] md:h-[7.5vh]">
         <Navbar />
       </div>
       <Sidebar />

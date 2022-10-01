@@ -870,3 +870,266 @@ export const mockDataSearchTerm = [
     },
   },
 ]
+
+export const mockDataCurrentPlaying = {
+  videoId: 'LlLdzOHDfJo',
+  videoTitle: 'SPIDER-MAN PS4 - O Início de Gameplay, em Português PT-BR!',
+  videoDescription:
+    "Compre Spider-Man de PS4 aqui: http://baix.in/SpiderManPS4\nBilômetro, baixe GRÁTIS e economize $$$ - http://bilometro.brksedu.com.br\n\nVídeo gameplay do jogo Spider-Man, exclusivo de PlayStation 4. Gravado em um PS4 Pro. Game está dublado e legendado em Português PT-BR.\n\nVídeo parte de uma série de gameplays (estilo let's play / playthrough) do jogo do Homem-Aranha. \n\nSpider-Man de PS4 é um game de ação / aventura em mundo aberto. Desenvolvido pela Insomniac Games e publicado pela Sony.\n\nTema da Introdução: Alive, da banda Warbly Jets\nOuça aqui: https://fanlink.to/warblyjetsalive\nMais sobre a banda Warbly Jets aqui: https://fanlink.to/warblyjetshome\n\nVire patrocinador do canal: https://goo.gl/uYx9kj\n\nTwitter: @brksedu\nInstagram: BRKsEDU\nFacebook: BRKsEDU\nCanal de vlogs: http://www.youtube.com/PequenoSapeca\n\nCaixa Postal BRKsEDU:\n- Caixa Postal 19063\n- CEP 04505-970\n- São Paulo - SP\n- Brasil\n\nAssine Epidemic Sound - biblioteca de áudio que uso em muitos de meus vídeos - com meu link de afiliado: http://share.epidemicsound.com/BRKsEDU\n\nContato comercial: comercial @ brksedu . com . br #BRKsEDU",
+  videoViews: '5,719,055',
+  videoLikes: '277K',
+  videoAge: '4 years',
+  channelInfo: {
+    id: 'UCWKtHaeXVzUscYGcm0hEunw',
+    image:
+      'https://yt3.ggpht.com/ytc/AMLnZu_4zsVlenlnnMvBAzVPWcETxZoTjKuGGj1BvI45TA=s88-c-k-c0x00ffffff-no-rj',
+    name: 'BRKsEDU',
+    subscribers: '9M',
+  },
+}
+
+export const mockDaraRecommededVideos = [
+  {
+    videoId: 'dK-5_aZgL2U',
+    videoTitle:
+      'Não Tinha Como Não Testar Esse Jogo! - Início de Gameplay de Shovel Knight Dig, em Português PT-BR',
+    videoThumbnail: 'https://i.ytimg.com/vi/dK-5_aZgL2U/mqdefault.jpg',
+    videoDuration: '24:38',
+    videoViews: '7K',
+    videoAge: '2 hours',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'IW-vxseJHK4',
+    videoTitle: 'Minha Jornada em... ZELDA A LINK TO THE PAST!',
+    videoThumbnail: 'https://i.ytimg.com/vi/IW-vxseJHK4/mqdefault.jpg',
+    videoDuration: '36:24',
+    videoViews: '29K',
+    videoAge: '1 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'JgLJhGezskc',
+    videoTitle: 'várias novidades em Apex Legends!',
+    videoThumbnail: 'https://i.ytimg.com/vi/JgLJhGezskc/mqdefault.jpg',
+    videoDuration: '0:28',
+    videoViews: '10K',
+    videoAge: '1 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'LAM6Ish5uiw',
+    videoTitle: 'Olha a Maldade!!!',
+    videoThumbnail: 'https://i.ytimg.com/vi/LAM6Ish5uiw/mqdefault.jpg',
+    videoDuration: '0:17',
+    videoViews: '32K',
+    videoAge: '4 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'l5ebA8TX6hI',
+    videoTitle: 'Esse Jogo Desconhecido é MUITO a̶s̶s̶u̶s̶t̶a̶d̶o̶r̶  𝐌𝐀𝐂𝐀𝐁𝐑𝐎',
+    videoThumbnail: 'https://i.ytimg.com/vi/l5ebA8TX6hI/mqdefault.jpg',
+    videoDuration: '7:31',
+    videoViews: '46K',
+    videoAge: '7 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: '5RbK2bkg_vc',
+    videoTitle: 'tutorial de desentupir o nariz',
+    videoThumbnail: 'https://i.ytimg.com/vi/5RbK2bkg_vc/mqdefault.jpg',
+    videoDuration: '0:21',
+    videoViews: '97K',
+    videoAge: '8 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'Xs1mPAWHnzA',
+    videoTitle: 'Jogo NOJENTO com Gráficos IMPRESSIONANTES! | Scorn Gameplay',
+    videoThumbnail: 'https://i.ytimg.com/vi/Xs1mPAWHnzA/mqdefault.jpg',
+    videoDuration: '48:27',
+    videoViews: '464K',
+    videoAge: '9 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'a6Uiqua1Kz4',
+    videoTitle:
+      'Parei com a GUITARRA? E as Séries? O Que Acho RUIM no Canadá!? | Respondendo Perguntas e Comentários',
+    videoThumbnail: 'https://i.ytimg.com/vi/a6Uiqua1Kz4/mqdefault.jpg',
+    videoDuration: '12:02',
+    videoViews: '75K',
+    videoAge: '11 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'PvStO8nQcDU',
+    videoTitle: 'tutorial de jumência',
+    videoThumbnail: 'https://i.ytimg.com/vi/PvStO8nQcDU/mqdefault.jpg',
+    videoDuration: '0:25',
+    videoViews: '540K',
+    videoAge: '12 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'uIptPBinpnw',
+    videoTitle: 'Hack do Canal do Davy Jones é UMA VERGONHA para o YouTube!',
+    videoThumbnail: 'https://i.ytimg.com/vi/uIptPBinpnw/mqdefault.jpg',
+    videoDuration: '8:32',
+    videoViews: '443K',
+    videoAge: '13 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'cah-LAaWQNE',
+    videoTitle: 'Jogo de Terror MUITO DIFERENCIADO!',
+    videoThumbnail: 'https://i.ytimg.com/vi/cah-LAaWQNE/mqdefault.jpg',
+    videoDuration: '8:43',
+    videoViews: '38K',
+    videoAge: '14 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'IKQ0RpP-d6k',
+    videoTitle: 'Camuflagem PERFEITA no Zelda Breath of the Wild!!!',
+    videoThumbnail: 'https://i.ytimg.com/vi/IKQ0RpP-d6k/mqdefault.jpg',
+    videoDuration: '0:28',
+    videoViews: '81K',
+    videoAge: '15 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'I2k8BkWQiIA',
+    videoTitle: 'Nintendo 64 Como Você NUNCA VIU!!!',
+    videoThumbnail: 'https://i.ytimg.com/vi/I2k8BkWQiIA/mqdefault.jpg',
+    videoDuration: '12:51',
+    videoViews: '106K',
+    videoAge: '18 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'YGW_qgcpvSU',
+    videoTitle: 'Minha Jornada Zerando SUPER MARIO BROS de um jeito DIFERENTE!',
+    videoThumbnail: 'https://i.ytimg.com/vi/YGW_qgcpvSU/mqdefault.jpg',
+    videoDuration: '19:31',
+    videoViews: '44K',
+    videoAge: '19 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'p3jUAmMMGHk',
+    videoTitle: 'O Que Achei do THE LAST OF US PART I - Vale a Pena!?',
+    videoThumbnail: 'https://i.ytimg.com/vi/p3jUAmMMGHk/mqdefault.jpg',
+    videoDuration: '9:57',
+    videoViews: '212K',
+    videoAge: '29 days',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'YAhjg2OF6so',
+    videoTitle: 'O QUE É... SOUL HACKERS 2!',
+    videoThumbnail: 'https://i.ytimg.com/vi/YAhjg2OF6so/mqdefault.jpg',
+    videoDuration: '10:58',
+    videoViews: '37K',
+    videoAge: '1 months',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'MRZ9cOBP-wU',
+    videoTitle:
+      'THE LAST OF US Part I - O Início de Gameplay, em 4K60 HDR | Dublado e Legendado em Português PT-BR',
+    videoThumbnail: 'https://i.ytimg.com/vi/MRZ9cOBP-wU/mqdefault.jpg',
+    videoDuration: '1:05:51',
+    videoViews: '309K',
+    videoAge: '1 months',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'yxY1HhRRgDM',
+    videoTitle: 'Minha Jornada no Primeiro RESIDENT EVIL!!!',
+    videoThumbnail: 'https://i.ytimg.com/vi/yxY1HhRRgDM/mqdefault.jpg',
+    videoDuration: '42:11',
+    videoViews: '180K',
+    videoAge: '1 months',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: 'w00fNJGwapY',
+    videoTitle: 'GAMESCOM 2022 | Cobertura Ao Vivo do Evento de Games!!!',
+    videoThumbnail: 'https://i.ytimg.com/vi/w00fNJGwapY/mqdefault.jpg',
+    videoDuration: '2:20:33',
+    videoViews: '134K',
+    videoAge: '1 months',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+  {
+    videoId: '5gso4wSaYrY',
+    videoTitle: 'O Que É... RUMBLEVERSE!',
+    videoThumbnail: 'https://i.ytimg.com/vi/5gso4wSaYrY/mqdefault.jpg',
+    videoDuration: '10:49',
+    videoViews: '45K',
+    videoAge: '1 months',
+    channelInfo: {
+      id: 'UCWKtHaeXVzUscYGcm0hEunw',
+      name: 'BRKsEDU',
+    },
+  },
+]

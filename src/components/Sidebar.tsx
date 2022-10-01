@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   mainLinks,
   secondaryLinks,
@@ -10,13 +10,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useAppSelector } from '../store/hooks'
 import MenuIconSidebar from './fragments/MenuIconSidebar'
 import { useMediaQuery } from 'react-responsive'
+import { useLocation, useParams } from 'react-router-dom'
 
 type Props = {}
 
 const Sidebar = ({}: Props) => {
-  const openMenu = useAppSelector((state) => state.youtubeApp.openMenu)
-  const openMenuMobile = useAppSelector(
-    (state) => state.youtubeApp.openMenuMobile
+  const location = useLocation()
+  const initialOpenMenu = useAppSelector(
+    (state) => state.youtubeApp.initialOpenMenu
+  )
+  const initialCloseMenu = useAppSelector(
+    (state) => state.youtubeApp.initialCloseMenu
   )
   const menuItemsArrayLists = [
     mainLinks,
@@ -25,13 +29,11 @@ const Sidebar = ({}: Props) => {
     helpLinks,
   ]
 
+  const isWatchPage = location.pathname.includes('watch')
   // initial state of the menu is changed according to the view port
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
-  const menuState = isTabletOrMobile ? openMenuMobile : openMenu
-
-  console.log('openMenu:', openMenu, 'openMenuMobile:', openMenuMobile)
-
-  console.log('menuState:', menuState)
+  const menuState =
+    isTabletOrMobile || isWatchPage ? initialCloseMenu : initialOpenMenu
 
   return (
     <AnimatePresence>
@@ -41,7 +43,7 @@ const Sidebar = ({}: Props) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4 }}
           exit={{ x: -1000, opacity: 0 }}
-          className="md:w-2/12 w-1/2 z-50 border-r border-t border-[#aaaaaa]/20 h-screen overflow-y-scroll scrollbar-hide fixed top-14 bg-[#212121] pb-8 sidebar"
+          className="md:w-2/12 w-1/2 z-50 border-r border-t overflow-y-scroll border-[#aaaaaa]/20 max-h-screen overflow-x-hidden scrollbar-hide fixed top-14 bg-[#212121] pb-8"
         >
           {menuItemsArrayLists.map((arrayList, index) => (
             <ul className="flex cursor-pointer flex-col border-b border-[#aaaaaa]/20">

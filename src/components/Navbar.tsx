@@ -11,8 +11,8 @@ import {
   changeSearchTerm,
   clearSearchTerm,
   clearVideos,
-  setOpenMenu,
-  setOpenMenuMobile,
+  handleInitialOpenMenu,
+  handleInitialCloseMenu,
 } from '../store'
 import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos'
 import { useMediaQuery } from 'react-responsive'
@@ -33,6 +33,7 @@ const Navbar = ({}: Props) => {
     }
   }
 
+  const isWatchPage = location.pathname.includes('watch')
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   return (
@@ -42,9 +43,9 @@ const Navbar = ({}: Props) => {
           <HiMenuAlt3
             className="cursor-pointer hover:opacity-80 duration-200 transition-all"
             onClick={
-              isTabletOrMobile
-                ? () => dispatch(setOpenMenuMobile())
-                : () => dispatch(setOpenMenu())
+              isTabletOrMobile || isWatchPage
+                ? () => dispatch(handleInitialCloseMenu())
+                : () => dispatch(handleInitialOpenMenu())
             }
           />
         </div>
@@ -78,13 +79,13 @@ const Navbar = ({}: Props) => {
                 onClick={() => dispatch(clearSearchTerm())}
               />
             </div>
-            <button className="h-10 w-16 flex items-center justify-center bg-zinc-800">
-              <AiOutlineSearch className="text-xl cursor-pointer hover:opacity-80 duration-200 transition-all" />
+            <button className="h-10 w-16 flex group cursor-pointer items-center justify-center bg-zinc-800">
+              <AiOutlineSearch className="text-xl group-hover:opacity-80 duration-200 transition-all" />
             </button>
           </div>
         </form>
-        <div className="text-xl p-3 bg-zinc-900 hidden md:block rounded-full">
-          <TiMicrophone className="hidden md:block cursor-pointer hover:opacity-80 duration-200 transition-all" />
+        <div className="text-xl p-3 group bg-zinc-900 cursor-pointer hidden md:block rounded-full">
+          <TiMicrophone className="hidden md:block group-hover:opacity-80 duration-200 transition-all" />
         </div>
       </div>
       <div className="flex gap-5 items-center text-xl">
@@ -97,7 +98,7 @@ const Navbar = ({}: Props) => {
           </span>
         </div>
         <img
-          src="https://github.com/stardusteight-d4c.png"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9kQ8vUe3JsjpSUC1Y6Yjo--sbL2pOys6LKA&usqp=CAU"
           alt="user/profile"
           className="w-9 h-9 rounded-full cursor-pointer"
         />
