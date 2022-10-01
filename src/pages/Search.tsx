@@ -7,7 +7,7 @@ import Spinner from '../components/fragments/Spinner'
 import { clearVideos } from '../store'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { HomePageVideos } from '../Types'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { getSearchPageVideos } from '../store/reducers/getSearchPageVideos'
 import { mockDataSearchTerm } from '../../mockData'
 import { motion } from 'framer-motion'
@@ -15,10 +15,11 @@ import { motion } from 'framer-motion'
 export default function Search() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  // const videos = useAppSelector((state) => state.youtubeApp.videos)
-  const videos = mockDataSearchTerm
+  const videosAPI = useAppSelector((state) => state.youtubeApp.videos)
   const searchTerm = useAppSelector((state) => state.youtubeApp.searchTerm)
   const openMenu = useAppSelector((state) => state.youtubeApp.initialOpenMenu)
+
+  const videos = videosAPI.length !== 0 ? videosAPI : mockDataSearchTerm
 
   useEffect(() => {
     dispatch(clearVideos())
@@ -53,8 +54,8 @@ export default function Search() {
                   next={() => dispatch(getSearchPageVideos(true))}
                   hasMore={videos.length < 500}
                   loader={<Spinner />}
-                  height="100vh"
-                  className="scrollbar-hide"
+                  height="95vh"
+                  className="scrollbar-hide overflow-visible"
                 >
                   {videos.map((item: HomePageVideos) => {
                     return (

@@ -9,7 +9,7 @@ type Props = {
 const Card = ({ data }: Props) => {
   return (
     <div className="grid col-span-1 w-full gap-3 transform hover:scale-105 duration-500 transition-all">
-      <div className="relative">
+      <div className="relative h-full">
         <span className="absolute bottom-1 right-1 text-sm bg-black/80 rounded-sm px-1 py-0.5 z-10">
           {data.videoDuration}
         </span>
@@ -33,7 +33,7 @@ const Card = ({ data }: Props) => {
         </div>
         <div>
           <h3>
-            <a href="#" className="line-clamp-2">
+            <a href="#" className="line-clamp-2 h-12">
               {data.videoTitle}
             </a>
           </h3>

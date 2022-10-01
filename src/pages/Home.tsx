@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { getHomePageVideos } from '../store/reducers/getHomePageVideos'
 import { HomePageVideos } from '../Types'
 import { mockDataHome } from '../../mockData'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Hashtag from '../components/fragments/Hashtag'
 import { tags } from '../components/fragments/sidebar'
 
@@ -26,9 +26,10 @@ type Props = {}
 
 const Home = (props: Props) => {
   const dispatch = useAppDispatch()
-  // const videos = useAppSelector((state) => state.youtubeApp.videos)
-  const videos = mockDataHome
+  const videosAPI = useAppSelector((state) => state.youtubeApp.videos)
   const openMenu = useAppSelector((state) => state.youtubeApp.initialOpenMenu)
+
+  const videos = videosAPI.length !== 0 ? videosAPI : mockDataHome
 
   useEffect(() => {
     dispatch(getHomePageVideos(false))
@@ -49,7 +50,7 @@ const Home = (props: Props) => {
   const slidesPerView = openMenu ? 11 : 12
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow-x-hidden scrollbar-hide">
       <div className="h-[5.3vh] md:h-[7.5vh]">
         <Navbar />
       </div>
@@ -83,16 +84,11 @@ const Home = (props: Props) => {
           next={() => dispatch(getHomePageVideos(true))}
           hasMore={videos.length < 500}
           loader={<Spinner />}
-          height="100vh"
-          className="scrollbar-hide md:mt-16"
+          height="95vh"
+          className="scrollbar-hide overflow-hidden md:mt-16"
         >
-          <motion.div
-            layout
-            transition={{ duration: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-12"
-          >
-            <motion.div
-              layout
+          <div className="grid h-auto overflow-hidden grid-cols-1 md:grid-cols-12">
+            <div
               className={`${style.openMenuLayout} ${
                 !openMenu && style.notOpenMenuLayout
               }`}
@@ -100,8 +96,8 @@ const Home = (props: Props) => {
               {videos.map((item: HomePageVideos, index) => {
                 return <Card data={item} key={index} />
               })}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </InfiniteScroll>
       ) : (
         <Spinner />

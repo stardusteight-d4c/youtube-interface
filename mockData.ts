@@ -888,7 +888,7 @@ export const mockDataCurrentPlaying = {
   },
 }
 
-export const mockDaraRecommededVideos = [
+export const mockDataRecommededVideos = [
   {
     videoId: 'dK-5_aZgL2U',
     videoTitle:

@@ -7,7 +7,7 @@ import { getVideoDetails } from '../store/reducers/getVideoDetails'
 import Sidebar from '../components/Sidebar'
 import WatchCard from '../components/WatchCard'
 import {
-  mockDaraRecommededVideos,
+  mockDataRecommededVideos,
   mockDataCurrentPlaying,
 } from '../../mockData'
 
@@ -24,7 +24,6 @@ import Comment from '../components/Comment'
 import { HandThumbUpIcon as HandThumbUpIconSolid } from '@heroicons/react/24/solid'
 import { handleInitialCloseMenu } from '../store'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useMediaQuery } from 'react-responsive'
 
 type Props = {}
 
@@ -39,32 +38,30 @@ const Watch = (props: Props) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  // const currentPlaying = useAppSelector(
-  //   (state) => state.youtubeApp.currentPlaying
-  // )
-  // const recommendedVideos = useAppSelector(
-  //   (state) => state.youtubeApp.recommendedVideos
-  // )
-  const currentPlaying = mockDataCurrentPlaying // id: LlLdzOHDfJo
-  const recommendedVideos = mockDaraRecommededVideos
+  const currentPlayingAPI = useAppSelector(
+    (state) => state.youtubeApp.currentPlaying
+  )
+  const recommendedVideosAPI = useAppSelector(
+    (state) => state.youtubeApp.recommendedVideos
+  )
 
-  // useEffect(() => {
-  //   if (id) {
-  //     dispatch(getVideoDetails(id))
-  //     setShowMoreStatus(false)
-  //   } else {
-  //     navigate('/')
-  //   }
-  // }, [id, navigate, dispatch])
+  const currentPlaying = currentPlayingAPI !== null ? currentPlayingAPI : mockDataCurrentPlaying // id: LlLdzOHDfJo
+  const recommendedVideos = recommendedVideosAPI.length !== 0 ? recommendedVideosAPI : mockDataRecommededVideos
 
-  // useEffect(() => {
-  //   if (currentPlaying && id) dispatch(getRecommendedVideos(id))
-  // }, [currentPlaying, dispatch, id])
+  useEffect(() => {
+    if (id) {
+      dispatch(getVideoDetails(id))
+      setShowMoreStatus(false)
+    } else {
+      navigate('/')
+    }
+  }, [id, navigate, dispatch])
+
+  useEffect(() => {
+    if (currentPlaying && id) dispatch(getRecommendedVideos(id))
+  }, [currentPlaying, dispatch, id])
 
   const menuState = initialCloseMenu
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
-
-  console.log('menuState WatchPage:', menuState)
 
   return (
     <>
@@ -121,11 +118,13 @@ const Watch = (props: Props) => {
                               onClick={() => setLikedVideo(!likedVideo)}
                             />
                           )}
-                          <span className='hidden md:block'>{currentPlaying.videoLikes}</span>
+                          <span className="hidden md:block">
+                            {currentPlaying.videoLikes}
+                          </span>
                         </div>
                         <div className="flex items-center gap-1 cursor-pointer">
                           <HandThumbDownIcon className="w-5" />
-                          <span className='hidden md:block'>Dislike</span>
+                          <span className="hidden md:block">Dislike</span>
                         </div>
                         <div className="flex items-center gap-1 cursor-pointer">
                           <ShareIcon className="w-5" />
@@ -146,7 +145,7 @@ const Watch = (props: Props) => {
                     </div>
                     <div className="flex gap-4 border-t border-[#aaaaaa]/20 flex-col my-5 pb-3 border-l-transparent border-r-transparent">
                       <div className="flex items-center gap-5 mr-5 mt-4">
-                        <div className='w-28 md:w-14'>
+                        <div className="w-28 md:w-14">
                           <img
                             src={currentPlaying.channelInfo.image}
                             alt="channel/img"
