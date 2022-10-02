@@ -285,7 +285,9 @@ We can summarize the flow of data through a Redux app with this diagram. It repr
  - <strong>the store runs the reducer function to calculate a new state.</strong>
  - <strong>the UI reads the new state to display the new values.</strong>
  
-![dataflow](redux-data-flow.gif)
+<div align="center">
+<img src="redux-data-flow.gif" width="500" />
+</div>
 
 *<i>redux.js.org/tutorials/fundamentals/part-1-overview</i>
 
