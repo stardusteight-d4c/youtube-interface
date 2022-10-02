@@ -6,4 +6,6 @@
 in which it is possible to get the data from Youtube videos in real time. The `Redux Toolkit and Axios` libraries were used
 to perform requests, process data and manage the state of requests. Also implemented `Infinite Scroll`
 which causes the `getHomePageVideos` or `getSearchPageVideos` function to make a new request with the `pageToken` parameter to
-retrieve an additional page of results.
+retrieve an additional page of results. Base project taught in the <strong>Kishan Sheth</strong> channel.
+
+:arrow_right: Redux Toolkit | A Predictable State Container for JS Apps, batteries-included toolset for efficient Redux development <br />
