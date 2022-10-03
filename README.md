@@ -13,7 +13,6 @@ retrieve an additional page of results. Base project taught in the <strong>Kisha
 :arrow_right: Redux | State, Actions, and Reducers <br />
 :arrow_right: Redux Toolkit | A Predictable State Container for JS Apps, batteries-included toolset for efficient Redux development <br />
 :arrow_right: Infinite Scroll and Pagination <br />
-:arrow_right: ParsedData
 
 <br />
 
@@ -1002,3 +1001,102 @@ export const getHomePageVideos = createAsyncThunk(
 <br />
 
 ## Infinite Scroll and Pagination
+
+`Infinite Scroll` is a technique used so that the user of the application does not need to navigate between pages to display more data of a certain thing (this technique is called `pagination`), the infinite scroll proposes to load new data for the user to scroll to the page limit (due to the end of the current contents loaded), this type of technique is used a lot in social network feeds for example.
+
+Infinite scroll was implemented in this application using the `react-infinite-scroll-component` library which provides a component that has props that configure component properties and behaviors:
+
+```tsx
+// src/pages/Home.tsx
+
+{videos.length ? (
+  <InfiniteScroll
+    dataLength={videos.length} /This is important field to render the next data
+    next={() => dispatch(getHomePageVideos(true))} // fetchData new data
+    hasMore={videos.length < 500} // it tells the InfiniteScroll component on whether to call next function on reaching the bottom and shows an endMessage to the user
+    loader={<Spinner />}
+    height="95vh"
+    className="scrollbar-hide overflow-hidden md:mt-16"
+  >
+    <div className="grid h-auto overflow-hidden grid-cols-1 md:grid-cols-12">
+      <div
+        className={`${style.openMenuLayout} ${
+          !openMenu && style.notOpenMenuLayout
+        }`}
+      >
+        {videos.map((item: HomePageVideos, index) => {
+          return <Card data={item} key={index} />
+        })}
+      </div>
+    </div>
+  </InfiniteScroll>
+) : (
+  <Spinner />
+)}
+```
+
+For this to be possible, as long as `hasMore` is `true`, the component will continue to call the function that will request the data, only this time it passes the argument "true", which is the value used inside `getHomePageVideos` in the `isNext parameter : boolean`, so the request is performed with the optional `pageToken` parameter that requests the new page with 20 more items.
+
+```tsx
+next={() => dispatch(getHomePageVideos(true))} // fetchData new data
+``` 
+
+```tsx
+// src/store/reducers/getHomePageVideos.ts
+
+export const getHomePageVideos = createAsyncThunk(
+  'youtubeApp/homePageVideos',
+  async (isNext: boolean, { getState }) => {
+    const {
+      youtubeApp: { nextPageToken: nextPageTokenFromState, videos },
+    } = getState() as RootState
+    const {
+      data: { items, nextPageToken },
+    } = await axios.get(
+      `${YOUTUBE_API_URL}/search?maxResults=20&q="crunchyroll+collection"&key=${API_KEY}&part=snippet&type=video${
+        isNext ? `&pageToken=${nextPageTokenFromState}` : ''
+      }`
+    )
+    const data = await axios.get(
+      `${YOUTUBE_API_URL}/search?maxResults=20&q="crunchyroll+collection"&key=${API_KEY}&part=snippet&type=video${
+        isNext ? `&pageToken=${nextPageTokenFromState}` : ''
+      }`
+    )
+
+    console.log('items', items)
+    console.log('nextPageToken', nextPageToken)
+    console.log('nextPageTokenFromState', nextPageTokenFromState)
+  
+  const parsedData: HomePageVideos[] = await parseData(items)
+    return { parsedData: [...videos, ...parsedData], nextPageToken }
+  }
+)
+```
+
+But `hasMore` tells the component to call the function only when the scroll reaches the end of its component. So the initial data are:
+
+ - items `Array(20) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]`
+ - nextPageToken `CBQQAA` -> first token
+ - nextPageTokenFromState `null` -> no token yet
+
+Only after the first request do we have access to `nextPageTokenFromState`:
+
+```tsx
+// src/store/index.ts 
+
+builder.addCase(getHomePageVideos.fulfilled, (state, action) => {
+  state.videos = action.payload.parsedData
+  state.nextPageToken = action.payload.nextPageToken // save the response token
+})
+```
+
+```tsx
+// src/store/reducers/getHomePageVideos.ts
+
+async (isNext: boolean, { getState }) => {
+  const {
+    youtubeApp: { nextPageToken: nextPageTokenFromState, videos },
+  } = getState() as RootState // with getState get the saved token
+```
+
+If this is not done, the infinite scroll will always `make the same request with the same token`, therefore it will only `repeat` the same data, so we need to save the token.
