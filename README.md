@@ -12,6 +12,8 @@ retrieve an additional page of results. Base project taught in the <strong>Kisha
 :arrow_right: Redux - State Management and Redux Terminology <br />
 :arrow_right: Redux | State, Actions, and Reducers <br />
 :arrow_right: Redux Toolkit | A Predictable State Container for JS Apps, batteries-included toolset for efficient Redux development <br />
+:arrow_right: Infinite Scroll and Pagination
+:arrow_right: ParsedData
 
 <br />
 
@@ -560,3 +562,443 @@ export default function appReducer(state = initialState, action) {
 <br />
 
 ## Redux Toolkit | A Predictable State Container for JS Apps, batteries-included toolset for efficient Redux development
+
+The Redux Toolkit package is intended to be the standard way to write Redux logic. It was originally created to help address three common concerns about Redux:
+
+ - "Configuring a Redux store is too complicated"
+ - "I have to add a lot of packages to get Redux to do anything useful"
+ - "Redux requires too much boilerplate code"
+
+We can't solve every use case, but in the spirit of create-react-app, we can try to provide some tools that `abstract` over the setup process and handle the most common use cases, as well as include some useful utilities that will let the user simplify their application code.
+
+These tools should be beneficial to all Redux users. Whether you're a brand new Redux user setting up your first project, or an experienced user who wants to simplify an existing application, Redux Toolkit can help you make your Redux code better.
+
+#### Installation
+
+ - `npm install react-redux @reduxjs/toolkit`
+
+### Redux Toolkit APIs
+
+ - <strong>createSlice()</strong>: accepts an `object of reducer functions`, a `slice name`, and an `initial state value`, and automatically generates a slice reducer with corresponding `action creators` and `action types`.
+ 
+Internally, it uses `createAction` and `createReducer`, so you may also use Immer to write "mutating" immutable updates.
+ 
+```ts
+// src/store/index.ts
+
+//...
+const initialState: InitialState = {
+  initialOpenMenu: true,
+  initialCloseMenu: false,
+  videos: [],
+  currentPlaying: null,
+  searchTerm: '',
+  searchResults: [],
+  nextPageToken: null,
+  recommendedVideos: [],
+}
+
+const YoutubeSlice = createSlice({
+  name: 'youtubeApp', // domain name
+  initialState,
+  reducers: { // actions
+    handleInitialOpenMenu: (state) => {
+      state.initialOpenMenu = !state.initialOpenMenu
+    },
+    handleInitialCloseMenu: (state) => {
+      state.initialCloseMenu = !state.initialCloseMenu
+    },
+    clearVideos: (state) => {
+      state.videos = []
+      state.nextPageToken = null
+    },
+    changeSearchTerm: (state, action: PayloadAction<string>) => {
+      state.searchTerm = action.payload
+    },
+    clearSearchTerm: (state) => {
+      state.searchTerm = ''
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getHomePageVideos.fulfilled, (state, action) => {
+      state.videos = action.payload.parsedData
+      state.nextPageToken = action.payload.nextPageToken
+    })
+    builder.addCase(getSearchPageVideos.fulfilled, (state, action) => {
+      state.videos = action.payload.parsedData
+      state.nextPageToken = action.payload.nextPageToken
+    })
+    builder.addCase(getVideoDetails.fulfilled, (state, action) => {
+      state.currentPlaying = action.payload
+    })
+    builder.addCase(getRecommendedVideos.fulfilled, (state, action) => {
+      state.recommendedVideos = action.payload.parsedData
+    })
+  },
+})
+// ...
+```
+
+ - `Parameters`
+
+`createSlice` accepts a single configuration object parameter, with the following options:
+
+```ts
+function createSlice({
+    // A name, used in action types
+    name: string,
+    // The initial state for the reducer
+    initialState: any,
+    // An object of "case reducers". Key names will be used to generate actions.
+    reducers: Object<string, ReducerFunction | ReducerAndPrepareObject>
+    // A "builder callback" function used to add more reducers, or
+    // an additional object of "case reducers", where the keys should be other
+    // action types
+    extraReducers?:
+    | Object<string, ReducerFunction>
+    | ((builder: ActionReducerMapBuilder<State>) => void)
+})
+```
+
+ - `name` A string name for this slice of state. Generated action type constants will use this as a prefix.
+ - `initialState` - The initial state value for this slice of state.
+ - `reducers` - An object containing Redux "case reducer" functions (functions intended to `handle a specific action type`, equivalent to a `single case statement in a switch`).
+ - `extraReducers` - A "builder callback" function used to add more reducers, or an additional object of "case reducers", where the keys should be other action types.
+
+#### reducers
+
+The `keys in the object` will be used to generate `string action type constants`, and these will show up in the `Redux DevTools Extension` when they are `dispatched`. Also, if any other part of the application happens to dispatch an action with the exact same type string, the corresponding reducer will be run. Therefore, you should give the functions descriptive names.
+
+```ts
+changeSearchTerm: (state, action: PayloadAction<string>) => {
+  state.searchTerm = action.payload
+},
+```
+
+This object will be passed to `createReducer`, so the reducers may safely "mutate" the state they are given.
+
+#### extraReducers
+
+One of the key concepts of Redux is that `each slice reducer` "owns" its `slice of state`, and that many slice reducers can independently respond to the same action type. `extraReducers` allows createSlice to respond to `other action types` besides the types it has generated.
+
+As case reducers specified with extraReducers are meant to reference `external actions`, they will not have actions generated in `slice.actions`.
+
+As with `reducers`, these case reducers will also be passed to `createReducer` and may "mutate" their state safely.
+
+If two fields from `reducers` and `extraReducers` happen to end up with the same action type string, the function from reducers will be used to handle that action type.
+
+##### The extraReducers "builder callback" notation
+
+The recommended way of using `extraReducers` is to use a `callback` that receives a `ActionReducerMapBuilder` instance.
+
+This `builder notation` is also the only way to add matcher reducers and default case reducers to your slice.
+
+```ts
+import {
+  createAction,
+  createReducer,
+  AnyAction,
+  PayloadAction,
+} from '@reduxjs/toolkit'
+
+const increment = createAction<number>('increment')
+const decrement = createAction<number>('decrement')
+
+function isActionWithNumberPayload(
+  action: AnyAction
+): action is PayloadAction<number> {
+  return typeof action.payload === 'number'
+}
+
+const reducer = createReducer(
+  {
+    counter: 0,
+    sumOfNumberPayloads: 0,
+    unhandledActions: 0,
+  },
+  (builder) => {
+    builder
+      .addCase(increment, (state, action) => {
+        // action is inferred correctly here
+        state.counter += action.payload
+      })
+      // You can chain calls, or have separate `builder.addCase()` lines each time
+      .addCase(decrement, (state, action) => {
+        state.counter -= action.payload
+      })
+      // You can apply a "matcher function" to incoming actions
+      .addMatcher(isActionWithNumberPayload, (state, action) => {})
+      // and provide a default case if no other handlers matched
+      .addDefaultCase((state, action) => {})
+  }
+)
+```
+
+We recommend using this API as it has better TypeScript support (and thus, IDE autocomplete even for JavaScript users), as it will correctly infer the action type in the reducer based on the provided action creator. It's particularly useful for working with actions produced by `createAction` and `createAsyncThunk`.
+
+#### Return Value
+
+createSlice will return an object that looks like:
+
+```ts
+{		
+  name : string,
+  reducer : ReducerFunction,
+  actions : Record<string, ActionCreator>,
+  caseReducers: Record<string, CaseReducer>.
+  getInitialState: () => State
+}
+```
+
+Each function defined in the `reducers` argument will have a corresponding action creator generated using `createAction` and included in the result's `actions` field using the same function name.
+
+The generated `reducer` function is suitable for passing to the Redux `combineReducers` function as a "slice reducer".
+
+You may want to consider destructuring the action creators and exporting them individually, for ease of searching for references in a larger codebase.
+
+The functions passed to the `reducers` parameter can be accessed through the `caseReducers` return field. This can be particularly useful for testing or direct access to reducers created inline.
+
+Result's function `getInitialState` provides access to the initial state value given to the slice. If a lazy state initializer was provided, it will be called and a fresh value returned.
+
+
+```ts
+import { createSlice, createAction } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createStore, combineReducers } from 'redux'
+
+const incrementBy = createAction<number>('incrementBy')
+const decrementBy = createAction<number>('decrementBy')
+
+const counter = createSlice({
+  name: 'counter',
+  initialState: 0 as number,
+  reducers: {
+    increment: (state) => state + 1,
+    decrement: (state) => state - 1,
+    multiply: {
+      reducer: (state, action: PayloadAction<number>) => state * action.payload,
+      prepare: (value?: number) => ({ payload: value || 2 }), // fallback if the payload is a falsy value
+    },
+  },
+  // "builder callback API", recommended for TypeScript users
+  extraReducers: (builder) => {
+    builder.addCase(incrementBy, (state, action) => {
+      return state + action.payload
+    })
+    builder.addCase(decrementBy, (state, action) => {
+      return state - action.payload
+    })
+  },
+})
+
+const user = createSlice({
+  name: 'user',
+  initialState: { name: '', age: 20 },
+  reducers: {
+    setUserName: (state, action) => {
+      state.name = action.payload // mutate the state all you want with immer
+    },
+  },
+  // "map object API"
+  extraReducers: {
+    // @ts-expect-error in TypeScript, this would need to be [counter.actions.increment.type]
+    [counter.actions.increment]: (
+      state,
+      action /* action will be inferred as "any", as the map notation does not contain type information */
+    ) => {
+      state.age += 1
+    },
+  },
+})
+
+const reducer = combineReducers({
+  counter: counter.reducer,
+  user: user.reducer,
+})
+
+const store = createStore(reducer)
+
+store.dispatch(counter.actions.increment())
+// -> { counter: 1, user: {name : '', age: 21} }
+store.dispatch(counter.actions.increment())
+// -> { counter: 2, user: {name: '', age: 22} }
+store.dispatch(counter.actions.multiply(3))
+// -> { counter: 6, user: {name: '', age: 22} }
+store.dispatch(counter.actions.multiply())
+// -> { counter: 12, user: {name: '', age: 22} }
+console.log(`${counter.actions.decrement}`)
+// -> "counter/decrement"
+store.dispatch(user.actions.setUserName('eric'))
+// -> { counter: 12, user: { name: 'eric', age: 22} }
+```
+
+- <strong>configureStore()</strong>: wraps `createStore` to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you supply, includes redux-thunk by default, and enables use of the Redux DevTools Extension.
+
+A friendly `abstraction` over the standard Redux `createStore` function that adds good defaults to the store setup for a better development experience.
+
+#### Basic usage example
+
+```ts
+// src/store/index.ts 
+
+export const store = configureStore({
+  reducer: { youtubeApp: YoutubeSlice.reducer },
+})
+```
+
+- <strong>createAsyncThunk()</strong>: accepts an `action type string` and a `function that returns a promise`, and generates a thunk that dispatches `pending/fulfilled/rejected` action types based on that promise.
+
+A function that accepts a Redux action type string and a callback function that should return a promise. It generates `promise lifecycle action types` based on the action type prefix that you pass in, and `returns a thunk action creator` that will run the promise callback and `dispatch the lifecycle actions` based on the returned promise.
+
+This abstracts the standard recommended approach for handling async request lifecycles.
+
+It does not generate any reducer functions, since it does not know what data you're fetching, how you want to track loading state, or how the data you return needs to be processed. You should write your own reducer logic that handles these actions, with whatever loading state and processing logic is appropriate for your own app.
+
+```ts
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { userAPI } from './userAPI'
+
+// First, create the thunk
+const fetchUserById = createAsyncThunk(
+  'users/fetchByIdStatus',
+  async (userId: number, thunkAPI) => {
+    const response = await userAPI.fetchById(userId)
+    return response.data
+  }
+)
+
+interface UsersState {
+  entities: []
+  loading: 'idle' | 'pending' | 'succeeded' | 'failed'
+}
+
+const initialState = {
+  entities: [],
+  loading: 'idle',
+} as UsersState
+
+// Then, handle actions in your reducers:
+const usersSlice = createSlice({
+  name: 'users',
+  initialState,
+  reducers: {
+    // standard reducer logic, with auto-generated action types per reducer
+  },
+  extraReducers: (builder) => {
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+      // Add user to the state array
+      state.entities.push(action.payload)
+    })
+  },
+})
+
+// Later, dispatch the thunk as needed in the app
+dispatch(fetchUserById(123))
+```
+
+ - `Parameters`
+
+`createAsyncThunk` accepts three parameters: a string action `type` value, a `payloadCreator` callback, and an `options` object.
+
+#### type
+
+A string that will be used to generate additional Redux action type constants, representing the `lifecycle of an async request`:
+
+For example, a type argument of `users/requestStatus` will generate these action types:
+
+ - pending: `users/requestStatus/pending`
+ - fulfilled: `users/requestStatus/fulfilled`
+ - rejected: `users/requestStatus/rejected`
+
+#### payloadCreator
+
+A callback function that should `return a promise containing the result of some asynchronous logic`. It may also return a value synchronously. If there is an error, it should either return a rejected promise containing an `Error` instance or a plain value such as a descriptive error message or otherwise a resolved promise with a `RejectWithValue` argument as returned by the `thunkAPI.rejectWithValue` function.
+
+The `payloadCreator` function can contain whatever logic you need to calculate an appropriate result. This could include a standard AJAX data fetch request, multiple AJAX calls with the results combined into a final value, interactions with React Native AsyncStorage, and so on.
+
+The `payloadCreator` function will be called with `two arguments`:
+
+ - `arg`: a single value, containing the `first parameter that was passed to the thunk action creator when it was dispatched`. This is useful for passing in values like item IDs that may be needed as part of the request. If you need to pass in multiple values, pass them together in an object when you dispatch the thunk, like dispatch(fetchUsers({status: 'active', sortBy: 'name'})).
+ - `thunkAPI`: an object containing all of the parameters that are normally passed to a Redux thunk function, as well as additional options:
+ 		- dispatch: the Redux store `dispatch` method
+    - getState: the Redux store `getState` method
+    - extra: the "extra argument" given to the thunk middleware on setup, if available
+    - requestId: a unique string ID value that was automatically generated to identify this request sequence
+    - signal: an AbortController.signal object that may be used to see if another part of the app logic has marked this request as needing cancelation.
+    - rejectWithValue(value, [meta]): rejectWithValue is a utility function that you can return (or throw) in your action creator to return a rejected response with a defined payload and meta. It will pass whatever value you give it and return it in the payload of the rejected action. If you also pass in a meta, it will be merged with the existing rejectedAction.meta.
+     - fulfillWithValue(value, meta): fulfillWithValue is a utility function that you can return in your action creator to fulfill with a value while having the ability of adding to fulfilledAction.meta.
+
+The logic in the payloadCreator function may use any of these values as needed to calculate the result.
+
+#### Options
+
+An object with the following optional fields:
+
+ - `condition(arg, { getState, extra } ): boolean | Promise<boolean>`: a callback that can be used to skip execution of the payload creator and all action dispatches, if desired. See Canceling Before Execution for a complete description.
+ - `dispatchConditionRejection`: if condition() returns false, the default behavior is that no actions will be dispatched at all. If you still want a "rejected" action to be dispatched when the thunk was canceled, set this flag to true.
+ - `idGenerator(arg): string`: a function to use when generating the requestId for the request sequence. Defaults to use nanoid, but you can implement your own ID generation logic.
+ - `serializeError(error: unknown) => any` to replace the internal miniSerializeError method with your own serialization logic.
+ - `getPendingMeta({ arg, requestId }, { getState, extra }): any`: a function to create an object that will be merged into the pendingAction.meta field.
+
+#### Return Value
+
+`createAsyncThunk` returns a standard Redux thunk action creator. The thunk action creator function will have plain action creators for the pending, fulfilled, and rejected cases attached as nested fields.
+
+Using the fetchUserById example above, createAsyncThunk will generate four functions:
+
+ - `fetchUserById`, the thunk action creator that kicks off the async payload callback you wrote
+  	- `fetchUserById.pending`, an action creator that dispatches an `'users/fetchByIdStatus/pending'` action
+ 	- `fetchUserById.fulfilled`, an action creator that dispatches an `'users/fetchByIdStatus/fulfilled'` action
+	- `fetchUserById.rejected`, an action creator that dispatches an `'users/fetchByIdStatus/rejected'` action
+
+When dispatched, the thunk will:
+
+ - dispatch the `pending` action
+ - call the `payloadCreator` callback and wait for the returned promise to settle
+ - when the promise settles:
+    - if the promise resolved successfully, dispatch the `fulfilled` action with the promise value as `action.payload`
+    - if the promise resolved with a `rejectWithValue(value)` return value, dispatch the `rejected`action with the value passed into `action.payload` and 'Rejected' as `action.error.message`
+    - if the promise failed and was not handled with `rejectWithValue`, dispatch the `rejected` action with a serialized version of the error value as `action.error`
+ - Return a fulfilled promise containing the final dispatched action (either the `fulfilled` or `rejected` action object)
+ 
+```ts
+// src/store/reducers/getHomePageVideos.ts 
+
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import { HomePageVideos } from '../../Types'
+import { parseData } from '../../utils'
+import { YOUTUBE_API_URL } from '../../utils/constants'
+import { RootState } from '../index'
+
+const API_KEY = import.meta.env.VITE_APP_YOUTUBE_DATA_API_KEY
+
+export const getHomePageVideos = createAsyncThunk(
+  'youtubeApp/homePageVideos',
+  async (isNext: boolean, { getState }) => {
+    const {
+      youtubeApp: { nextPageToken: nextPageTokenFromState, videos },
+    } = getState() as RootState
+    const {
+      data: { items, nextPageToken },
+    } = await axios.get(
+      `${YOUTUBE_API_URL}/search?maxResults=20&q="crunchyroll+collection"&key=${API_KEY}&part=snippet&type=video${
+        isNext ? `&pageToken=${nextPageTokenFromState}` : ''
+      }`
+    )
+    // console.log(items)
+    const parsedData: HomePageVideos[] = await parseData(items)
+    return { parsedData: [...videos, ...parsedData], nextPageToken }
+  }
+)
+```
+
+*<i>redux-toolkit.js.org/introduction/getting-started</i> <br/>
+*<i>redux-toolkit.js.org/api/createSlice</i> <br/>
+*<i>redux-toolkit.js.org/api/configureStore</i> <br/>
+*<i>redux-toolkit.js.org/api/createAsyncThunk</i> <br/>
+
+<br />
+
+## Infinite Scroll and Pagination
