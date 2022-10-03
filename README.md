@@ -12,7 +12,7 @@ retrieve an additional page of results. Base project taught in the <strong>Kisha
 :arrow_right: Redux - State Management and Redux Terminology <br />
 :arrow_right: Redux | State, Actions, and Reducers <br />
 :arrow_right: Redux Toolkit | A Predictable State Container for JS Apps, batteries-included toolset for efficient Redux development <br />
-:arrow_right: Infinite Scroll and Pagination
+:arrow_right: Infinite Scroll and Pagination <br />
 :arrow_right: ParsedData
 
 <br />
