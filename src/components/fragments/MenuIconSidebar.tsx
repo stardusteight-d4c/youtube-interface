@@ -16,8 +16,8 @@ const MenuIconSidebar = ({ array }: Props) => {
         return (
           <li
             key={index}
-            className={`pl-6 py-3 hover:bg-[#383838] ${
-              item.name == 'Home' && 'bg-[#383838]'
+            className={`pl-6 py-3 hover:bg-[#1d2223] ${
+              item.name == 'Home' && 'bg-[#1d2223]'
             }`}
           >
             <a href="#" className="flex items-center gap-5">

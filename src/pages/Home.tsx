@@ -60,10 +60,10 @@ const Home = (props: Props) => {
         transition={{ duration: 0.5 }}
         className={`${
           !openMenu && '!w-screen'
-        } hidden h-14 px-5 md:flex col-start-3 absolute right-0 top-14 bg-[#212121] border-y z-40 border-[#aaaaaa]/20 w-[85vw]`}
+        } hidden h-14 px-5 md:flex col-start-3 absolute right-0 top-14 bg-[#0a0c0d] border-y z-40 border-[#aaaaaa]/20 w-[85vw]`}
       >
-        <div className="absolute right-0 z-50 w-[100px] h-14 bg-gradient-to-l to-transparent via-[#212121] from-[#212121]" />
-        <div className="absolute left-1 z-50 w-[50px] h-14 bg-gradient-to-r to-transparent via-[#212121] from-[#212121]" />
+        <div className="absolute right-0 z-50 w-[100px] h-14 bg-gradient-to-l to-transparent via-[#1f1f1f] from-[#1f1f1f]" />
+        <div className="absolute left-1 z-50 w-[50px] h-14 bg-gradient-to-r to-transparent via-[#1f1f1f] from-[#1f1f1f]" />
         <Swiper
           modules={[Virtual]}
           virtual

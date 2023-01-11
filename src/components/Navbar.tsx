@@ -37,7 +37,7 @@ const Navbar = ({}: Props) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   return (
-    <nav className="flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#212121] z-40">
+    <nav className="flex fixed top-0 w-screen justify-between items-center px-4 h-14 bg-[#0a0c0d] z-40">
       <div className="flex gap-2 md:gap-8 items-center text-2xl">
         <div>
           <HiMenuAlt3

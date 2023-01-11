@@ -43,7 +43,7 @@ const Sidebar = ({}: Props) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4 }}
           exit={{ x: -1000, opacity: 0 }}
-          className="md:w-2/12 w-1/2 z-50 border-r border-t overflow-y-scroll border-[#aaaaaa]/20 max-h-screen overflow-x-hidden scrollbar-hide fixed top-14 bg-[#212121] pb-8"
+          className="md:w-2/12 w-1/2 z-50 border-r border-t overflow-y-scroll border-[#aaaaaa]/20 max-h-screen overflow-x-hidden scrollbar-hide fixed top-14 bg-[#0a0c0d] pb-8"
         >
           {menuItemsArrayLists.map((arrayList, index) => (
             <ul className="flex cursor-pointer flex-col border-b border-[#aaaaaa]/20">

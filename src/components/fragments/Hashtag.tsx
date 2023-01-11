@@ -10,7 +10,7 @@ const Hashtag = ({ title }: Props) => {
       <div
         className={`${
           title == 'All' && '!bg-white !text-black'
-        } bg-[#373737] group-hover:brightness-125 transition-all ease-in-out rounded-full border border-[#aaaaaa]/20 px-4 py-1`}
+        } bg-[#1c2123] group-hover:brightness-125 transition-all ease-in-out rounded-full border border-[#aaaaaa]/20 px-4 py-1`}
       >
         {title}
       </div>
