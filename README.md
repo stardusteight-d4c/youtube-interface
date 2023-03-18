@@ -689,7 +689,7 @@ This object will be passed to `createReducer`, so the reducers may safely "mutat
 
 #### extraReducers
 
-One of the key concepts of Redux is that each slice reducer "owns" its `slice of state`, and that many slice reducers can independently respond to the same action type. extraReducers allows createSlice to respond to other action types besides the types it has generated.
+One of the key concepts of Redux is that each slice reducer "owns" its slice of state, and that many slice reducers can independently respond to the same action type. extraReducers allows createSlice to respond to other action types besides the types it has generated.
 
 As case reducers specified with extraReducers are meant to reference external actions, they will not have actions generated in `slice.actions`.
 
@@ -842,9 +842,9 @@ store.dispatch(user.actions.setUserName('eric'))
 // -> { counter: 12, user: { name: 'eric', age: 22} }
 ```
 
-- <strong>configureStore()</strong>: wraps `createStore` to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you supply, includes redux-thunk by default, and enables use of the Redux DevTools Extension.
+* `configureStore()`: wraps `createStore` to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you supply, includes redux-thunk by default, and enables use of the Redux DevTools Extension.
 
-A friendly `abstraction` over the standard Redux `createStore` function that adds good defaults to the store setup for a better development experience.
+A friendly abstraction over the standard Redux `createStore` function that adds good defaults to the store setup for a better development experience.
 
 #### Basic usage example
 
@@ -856,9 +856,9 @@ export const store = configureStore({
 })
 ```
 
-- <strong>createAsyncThunk()</strong>: accepts an `action type string` and a `function that returns a promise`, and generates a thunk that dispatches `pending/fulfilled/rejected` action types based on that promise.
+* `createAsyncThunk()`: accepts an action type string and a function that returns a promise, and generates a thunk that dispatches `pending/fulfilled/rejected` action types based on that promise.
 
-A function that accepts a Redux action type string and a callback function that should return a promise. It generates `promise lifecycle action types` based on the action type prefix that you pass in, and `returns a thunk action creator` that will run the promise callback and `dispatch the lifecycle actions` based on the returned promise.
+A function that accepts a Redux action type string and a callback function that should return a promise. It generates promise lifecycle action types based on the action type prefix that you pass in, and returns a thunk action creator that will run the promise callback and dispatch the lifecycle actions based on the returned promise.
 
 This abstracts the standard recommended approach for handling async request lifecycles.
 
@@ -907,37 +907,37 @@ const usersSlice = createSlice({
 dispatch(fetchUserById(123))
 ```
 
- - `Parameters`
+* <strong>Parameters</strong>
 
 `createAsyncThunk` accepts three parameters: a string action `type` value, a `payloadCreator` callback, and an `options` object.
 
 #### type
 
-A string that will be used to generate additional Redux action type constants, representing the `lifecycle of an async request`:
+A string that will be used to generate additional Redux action type constants, representing the lifecycle of an async request:
 
 For example, a type argument of `users/requestStatus` will generate these action types:
 
- - pending: `users/requestStatus/pending`
- - fulfilled: `users/requestStatus/fulfilled`
- - rejected: `users/requestStatus/rejected`
+* pending: `users/requestStatus/pending`
+* fulfilled: `users/requestStatus/fulfilled`
+* rejected: `users/requestStatus/rejected`
 
 #### payloadCreator
 
-A callback function that should `return a promise containing the result of some asynchronous logic`. It may also return a value synchronously. If there is an error, it should either return a rejected promise containing an `Error` instance or a plain value such as a descriptive error message or otherwise a resolved promise with a `RejectWithValue` argument as returned by the `thunkAPI.rejectWithValue` function.
+A callback function that should return a promise containing the result of some asynchronous logic. It may also return a value synchronously. If there is an error, it should either return a rejected promise containing an `Error` instance or a plain value such as a descriptive error message or otherwise a resolved promise with a `RejectWithValue` argument as returned by the `thunkAPI.rejectWithValue` function.
 
 The `payloadCreator` function can contain whatever logic you need to calculate an appropriate result. This could include a standard AJAX data fetch request, multiple AJAX calls with the results combined into a final value, interactions with React Native AsyncStorage, and so on.
 
-The `payloadCreator` function will be called with `two arguments`:
+The `payloadCreator` function will be called with two arguments:
 
- - `arg`: a single value, containing the `first parameter that was passed to the thunk action creator when it was dispatched`. This is useful for passing in values like item IDs that may be needed as part of the request. If you need to pass in multiple values, pass them together in an object when you dispatch the thunk, like dispatch(fetchUsers({status: 'active', sortBy: 'name'})).
- - `thunkAPI`: an object containing all of the parameters that are normally passed to a Redux thunk function, as well as additional options:
- 		- dispatch: the Redux store `dispatch` method
-    - getState: the Redux store `getState` method
-    - extra: the "extra argument" given to the thunk middleware on setup, if available
-    - requestId: a unique string ID value that was automatically generated to identify this request sequence
-    - signal: an AbortController.signal object that may be used to see if another part of the app logic has marked this request as needing cancelation.
-    - rejectWithValue(value, [meta]): rejectWithValue is a utility function that you can return (or throw) in your action creator to return a rejected response with a defined payload and meta. It will pass whatever value you give it and return it in the payload of the rejected action. If you also pass in a meta, it will be merged with the existing rejectedAction.meta.
-     - fulfillWithValue(value, meta): fulfillWithValue is a utility function that you can return in your action creator to fulfill with a value while having the ability of adding to fulfilledAction.meta.
+* `arg`: a single value, containing the first parameter that was passed to the thunk action creator when it was dispatched. This is useful for passing in values like item IDs that may be needed as part of the request. If you need to pass in multiple values, pass them together in an object when you dispatch the thunk, like `dispatch(fetchUsers({status: 'active', sortBy: 'name'}))`.
+* `thunkAPI`: an object containing all of the parameters that are normally passed to a Redux thunk function, as well as additional options:
+ 		* dispatch: the Redux store `dispatch` method
+    * getState: the Redux store `getState` method
+    * extra: the "extra argument" given to the thunk middleware on setup, if available
+    * requestId: a unique string ID value that was automatically generated to identify this request sequence
+    * signal: an AbortController.signal object that may be used to see if another part of the app logic has marked this request as needing cancelation.
+    * rejectWithValue(value, [meta]): rejectWithValue is a utility function that you can return (or throw) in your action creator to return a rejected response with a defined payload and meta. It will pass whatever value you give it and return it in the payload of the rejected action. If you also pass in a meta, it will be merged with the existing rejectedAction.meta.
+    * fulfillWithValue(value, meta): fulfillWithValue is a utility function that you can return in your action creator to fulfill with a value while having the ability of adding to fulfilledAction.meta.
 
 The logic in the payloadCreator function may use any of these values as needed to calculate the result.
 
@@ -957,10 +957,10 @@ An object with the following optional fields:
 
 Using the fetchUserById example above, createAsyncThunk will generate four functions:
 
- - `fetchUserById`, the thunk action creator that kicks off the async payload callback you wrote
-  	- `fetchUserById.pending`, an action creator that dispatches an `'users/fetchByIdStatus/pending'` action
- 	- `fetchUserById.fulfilled`, an action creator that dispatches an `'users/fetchByIdStatus/fulfilled'` action
-	- `fetchUserById.rejected`, an action creator that dispatches an `'users/fetchByIdStatus/rejected'` action
+* `fetchUserById`, the thunk action creator that kicks off the async payload callback you wrote
+  	* `fetchUserById.pending`, an action creator that dispatches an `'users/fetchByIdStatus/pending'` action
+ 	* `fetchUserById.fulfilled`, an action creator that dispatches an `'users/fetchByIdStatus/fulfilled'` action
+	* `fetchUserById.rejected`, an action creator that dispatches an `'users/fetchByIdStatus/rejected'` action
 
 When dispatched, the thunk will:
 
@@ -1011,9 +1011,9 @@ export const getHomePageVideos = createAsyncThunk(
 
 <br />
 
-## Infinite Scroll and Pagination
+### Infinite Scroll and Pagination
 
-`Infinite Scroll` is a technique used so that the user of the application does not need to navigate between pages to display more data of a certain thing (this technique is called `pagination`), the infinite scroll proposes to load new data for the user to scroll to the page limit (due to the end of the current contents loaded), this type of technique is used a lot in social network feeds for example.
+Infinite Scroll is a technique used so that the user of the application does not need to navigate between pages to display more data of a certain thing (this technique is called pagination), the infinite scroll proposes to load new data for the user to scroll to the page limit (due to the end of the current contents loaded), this type of technique is used a lot in social network feeds for example.
 
 Infinite scroll was implemented in this application using the `react-infinite-scroll-component` library which provides a component that has props that configure component properties and behaviors:
 
@@ -1046,7 +1046,7 @@ Infinite scroll was implemented in this application using the `react-infinite-sc
 )}
 ```
 
-For this to be possible, as long as `hasMore` is `true`, the component will continue to call the function that will request the data, only this time it passes the argument "true", which is the value used inside `getHomePageVideos` in the `isNext parameter : boolean`, so the request is performed with the optional `pageToken` parameter that requests the new page with 20 more items.
+For this to be possible, as long as `hasMore` is `true`, the component will continue to call the function that will request the data, only this time it passes the argument "true", which is the value used inside `getHomePageVideos` in the `isNext parameter: boolean`, so the request is performed with the optional `pageToken` parameter that requests the new page with 20 more items.
 
 ```tsx
 next={() => dispatch(getHomePageVideos(true))} // fetchData new data
@@ -1086,9 +1086,9 @@ export const getHomePageVideos = createAsyncThunk(
 
 But `hasMore` tells the component to call the function only when the scroll reaches the end of its component. So the initial data are:
 
- - items `Array(20) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]`
- - nextPageToken `CBQQAA` -> first token
- - nextPageTokenFromState `null` -> no token yet
+* items `Array(20) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]`
+* nextPageToken `CBQQAA` -> first token
+* nextPageTokenFromState `null` -> no token yet
 
 Only after the first request do we have access to `nextPageTokenFromState`:
 
@@ -1110,4 +1110,6 @@ async (isNext: boolean, { getState }) => {
   } = getState() as RootState // with getState get the saved token
 ```
 
-If this is not done, the infinite scroll will always `make the same request with the same token`, therefore it will only `repeat` the same data, so we need to save the token.
+If this is not done, the infinite scroll will always make the same request with the same token, therefore it will only repeat the same data, so we need to save the token.
+
+<p align="center">Project made with :blue_heart: by <a href="https://github.com/stardusteight-d4c">Gabriel Sena</a></p>
